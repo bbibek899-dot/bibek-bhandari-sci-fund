@@ -3,11 +3,11 @@ import { Campaign, Donation, CampaignUpdate } from '../types/fundraising';
 export const sciPatientCampaign: Campaign = {
   id: 'camp_sci_rehab_bibek_bhandari',
   title: 'Bibek Bhandari’s SCI Recovery Fund: 3.5 Years Intensive Neuro-Rehabilitation & Mobility',
-  tagline: 'Funding daily neuro-physiotherapy at Neurigo360 with Dr. Pratap, medical supplies, and mobility recovery after sudden D1-D5 spinal injury.',
+  tagline: 'Funding daily neuro-physiotherapy at Neurigo360 Advance Neuro Rehabilitation Centre with Dr. Pratap Kunwar Singh & Dr. Shakal Dev Gonda, medical supplies, and mobility recovery after emergency D1-D5 open spine surgery by Dr. Prakash Khetan.',
   creatorName: 'BIBEK BHANDARI',
   creatorHandle: '@sasibibek',
-  creatorAvatar: './images/bibek_bhandari_portrait_1790321487796.jpg',
-  heroBanner: './images/bibek_recovery_hero_1790321508089.jpg',
+  creatorAvatar: './images/bibek_profile_real.jpg',
+  heroBanner: './images/bibek_cover_photo_real.jpg',
   category: 'Medical & Neuro Rehabilitation',
   location: 'Chandrapur, Rautahat, Nepal',
   currency: 'NPR',
@@ -21,7 +21,7 @@ My name is **BIBEK BHANDARI**, from Chandrapur, Rautahat, Nepal.
 
 In January 2022, my life changed suddenly overnight. There was no fall, no accident, and no warning. Suddenly, severe spinal compression struck my nervous system, stripping away my mobility and leaving me with a serious spinal cord condition.
 
-On May 30, 2022, I underwent major spine surgery—a **D1-D5 Laminectomy** at Vaishnavi Neuro Hospital in Allahabad, performed by neurosurgeon Dr. Prakash Khetan. 
+On May 30, 2022, I underwent major spine surgery—a **D1-D5 Laminectomy** at Vaishnavi Neuro Hospital in Allahabad, performed by **Neurosurgeon Dr. Prakash Khetan** (who holds the **Guinness Book of World Records** of removing 296 cysts from brain successfully — my doctor who performed my open surgery). 
 
 My MRI scan and clinical impressions confirm:
 • Severe cord compression with focal myelopathy at D2/D3 and D3/D4 levels
@@ -38,8 +38,8 @@ Every single day, I fight against severe physical obstacles:
 5. **Severe Weakness & Rapid Fatigue:** Exhaustion after basic movements.
 6. **Bowel & Bladder Management:** Requiring meticulous daily routine and sterile medical supplies.
 
-**My Active Recovery Goals at Neurigo360:**
-Under the dedicated clinical guidance of **Dr. Pratap** at **Neurigo360**, I am actively working toward:
+**My Active Recovery Goals at Neurigo360 Advance Neuro Rehabilitation Centre:**
+Under the dedicated clinical guidance of **Dr. Pratap Kunwar Singh (BPT., MPT. - Young Founder / Physiotherapist)** and **Dr. Shakal Dev Gonda (BPT., MPT. - Physiotherapist)** at **Neurigo360 Advance Neuro Rehabilitation Centre, Greater Noida Paramount Golf Foreste**, I am actively working toward:
 • Strengthening my leg muscles (quadriceps, hamstrings) and activating dormant foot muscles
 • Overcoming foot drop through targeted neuro-muscular electrical stimulation and physical drills
 • Building upper and lower body stamina and cardiovascular endurance
@@ -48,7 +48,7 @@ Under the dedicated clinical guidance of **Dr. Pratap** at **Neurigo360**, I am 
 
 **Why 3.5 Years (42 Months) Minimum Fund is Essential:**
 Spinal cord recovery is not an overnight journey; neuroplastic rewiring takes years of consistent, uninterrupted therapy. To ensure my recovery is never halted due to financial strain, this fund covers:
-1. **Daily Intensive Neuro-Physiotherapy Sessions** (Neurigo360 under Dr. Pratap): NPR 30,00,000 (40%)
+1. **Daily Intensive Neuro-Physiotherapy Sessions** (Neurigo360 Advance Neuro Rehabilitation Centre with Dr. Pratap Kunwar Singh & Dr. Shakal Dev Gonda): NPR 30,00,000 (40%)
 2. **Accessible Housing & Rent** near the rehabilitation clinic: NPR 15,00,000 (20%)
 3. **Daily Medical Supplies, Spasticity Relief & Bowel Management Care**: NPR 11,25,000 (15%)
 4. **Daily Accessible Transport** between residence and therapy: NPR 9,75,000 (13%)
@@ -59,7 +59,7 @@ Every single rupee goes directly to our personal family account (Nepal SBI Bank 
 
 Thank you from the bottom of my heart for believing in my recovery!`,
   budgetBreakdown: [
-    { id: 'b1', item: '3.5 Yrs Daily Intensive Neuro-Physiotherapy (Neurigo360 with Dr. Pratap)', amount: 3000000, percentage: 40 },
+    { id: 'b1', item: '3.5 Yrs Daily Intensive Neuro-Physiotherapy (Neurigo360 with Dr. Pratap Kunwar Singh & Dr. Shakal Dev Gonda)', amount: 3000000, percentage: 40 },
     { id: 'b2', item: 'Wheelchair-Accessible Housing & Rent near Rehab Clinic (3.5 Yrs)', amount: 1500000, percentage: 20 },
     { id: 'b3', item: 'Daily Medical Supplies, Spasticity Relief & Bowel Management Care', amount: 1125000, percentage: 15 },
     { id: 'b4', item: 'Daily Accessible Transportation to Clinic & Therapy', amount: 975000, percentage: 13 },
@@ -76,8 +76,8 @@ Thank you from the bottom of my heart for believing in my recovery!`,
     branch: 'Hetauda Branch, Nepal',
     swiftOrRouting: 'NSBINPKX',
     fonepayQrText: 'fonepay://pay?recipient=9861452923&name=Bibek+Bhandari+SCI+Rehab',
-    esewaQrImage: './images/esewa_official_qr_1790321524240.jpg',
-    bankQrImage: './images/sbi_bank_nepal_qr_1790321539674.jpg'
+    esewaQrImage: './images/esewa_real_official_qr.jpg',
+    bankQrImage: './images/sbi_bank_nepal_real_qr.jpg'
   },
   socialLinks: {
     instagram: 'https://www.instagram.com/a1r4y3an',
@@ -85,6 +85,7 @@ Thank you from the bottom of my heart for believing in my recovery!`,
     facebook: 'https://www.facebook.com/share/1E1EVtPrPh/'
   },
   campaignSlug: 'bibek-bhandari-sci-recovery',
+  livePublicUrl: 'https://bbibek899-dot.github.io/bibek-bhandari-sci-fund/',
   medicalInfo: {
     isPatientCampaign: true,
     patientName: 'BIBEK BHANDARI',
@@ -93,15 +94,19 @@ Thank you from the bottom of my heart for believing in my recovery!`,
     causeOfInjury: 'Sudden onset overnight with no trauma or prior accident',
     surgeryHospital: 'Vaishnavi Neuro Hospital, Allahabad',
     operatingSurgeon: 'Dr. Prakash Khetan',
+    operatingSurgeonRecord: 'Holds Guinness Book of World Records of removing 296 cysts from brain successfully. My doctor who performed my open surgery.',
     surgeryDate: 'May 30, 2022',
     mriFindings: `• Lumbar spondylosis with multilevel grade III degenerative disc disease.
 • Annulus tears with multilevel postero-central disc bulges at L2/L3, L3/L4, L4/L5, and L5/S1 levels causing spinal canal stenosis and traversing nerve root compression.
 • Cervical spondylosis with mild degenerative disc disease.
 • Post-op changes in dorsal spine. Mild posterior disc bulges at D3/D4, D6/D7, and D8/D9 levels with focal myelopathy at D2/D3 and D3/D4 levels. Severe spinal cord compression.`,
-    rehabCenter: 'Neurigo360, Nepal',
-    physiotherapistName: 'Dr. Pratap (Lead Neuro-Physiotherapist)',
+    rehabCenter: 'Neurigo360 Advance Neuro Rehabilitation Centre',
+    rehabCenterAddress: 'Greater Noida Paramount Golf Foreste',
+    physiotherapistName: 'Dr. Pratap Kunwar Singh - BPT., MPT.',
+    physiotherapistTitle: 'Young Founder / Physiotherapist',
     physiotherapistAvatar: './images/avatar_physiotherapist_dr_1790313433006.jpg',
-    therapistConcern: 'Patient presents with post-D1-D5 laminectomy status and multi-segmental cord myelopathy. Incomplete classification confirms neuroplastic viability. However, severe spasticity, lower limb weakness, foot drop, and impaired coordination require uninterrupted daily neuro-physiotherapy over a 3.5-year protocol. Halting therapy will cause joint contractures, muscle atrophy, and loss of independent ambulation potential.',
+    associatePhysiotherapistName: 'Dr. Shakal Dev Gonda - BPT., MPT. Physiotherapist',
+    therapistConcern: 'Patient presents with post-D1-D5 open laminectomy status and multi-segmental cord myelopathy. Incomplete classification confirms neuroplastic viability. However, severe spasticity, lower limb weakness, foot drop, and impaired coordination require uninterrupted daily neuro-physiotherapy over a 3.5-year protocol. Halting therapy will cause joint contractures, muscle atrophy, and loss of independent ambulation potential.',
     clinicalGoal: 'Strengthen leg and foot muscles, resolve foot drop, restore brain-muscle coordination, build endurance, and achieve safe independent walking with dynamic balance and flexibility.',
     dailyChallenges: [
       'Fear of falling during stance & transfers',
@@ -204,13 +209,13 @@ Thank you from the bottom of my heart for believing in my recovery!`,
     },
     {
       id: 'doc_pt_4',
-      title: 'Neurigo360 Neuro-Rehabilitation Prescription & Clinical Letter',
+      title: 'Neurigo360 Advance Neuro Rehabilitation Prescription & Clinical Protocol',
       category: 'physio_assessment',
       date: 'January 2026',
-      hospital: 'Neurigo360 Rehabilitation, Nepal',
-      doctorName: 'Dr. Pratap (Lead Neuro-Physiotherapist)',
+      hospital: 'Neurigo360 Advance Neuro Rehabilitation Centre, Greater Noida Paramount Golf Foreste',
+      doctorName: 'Dr. Pratap Kunwar Singh (BPT., MPT.) & Dr. Shakal Dev Gonda (BPT., MPT.)',
       imageUrl: './images/exercise_scapular_wall_slide_1790313398123.jpg',
-      caption: 'Clinical therapy protocol detailing treatment goals for spasticity control, foot drop stimulation, and balance recovery.',
+      caption: 'Clinical therapy protocol detailing treatment goals for spasticity control, foot drop stimulation, and balance recovery under Dr. Pratap Kunwar Singh and Dr. Shakal Dev Gonda.',
       keyFindings: [
         'Daily supervised neuromuscular electrical stimulation for foot drop',
         'Supported standing frame progression to overcome fall anxiety',

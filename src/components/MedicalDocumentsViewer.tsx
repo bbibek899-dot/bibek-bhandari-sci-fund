@@ -107,7 +107,7 @@ export const MedicalDocumentsViewer: React.FC = () => {
             Official Spine MRI Scan Films &amp; Hospital Records
           </h3>
           <p className="text-xs text-slate-300 max-w-xl">
-            Donor transparency records from <strong>Vaishnavi Neuro Hospital, Allahabad (Dr. Prakash Khetan)</strong> and <strong>Neurigo360 (Dr. Pratap)</strong>. Tap any scan copy to view in high resolution.
+            Donor transparency records from <strong>Vaishnavi Neuro Hospital, Allahabad (Neurosurgeon Dr. Prakash Khetan - Guinness World Record Holder)</strong> and <strong>Neurigo360 Advance Neuro Rehab Centre, Greater Noida (Dr. Pratap Kunwar Singh &amp; Dr. Shakal Dev Gonda)</strong>. Tap any scan copy to view in high resolution.
           </p>
         </div>
 

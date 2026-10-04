@@ -26,6 +26,7 @@ export interface Donation {
   message?: string;
   timestamp: string;
   status: 'verified' | 'pending' | 'flagged';
+  donorPhone?: string; // Donor phone/WhatsApp number for direct thank-you dispatch
   donorSocialHandle?: string; // e.g. @anita_creates or IG username
   donorSocialPlatform?: 'instagram' | 'tiktok' | 'facebook' | 'whatsapp' | 'other';
   screenshotProofUrl?: string;
@@ -112,11 +113,15 @@ export interface PatientMedicalInfo {
   causeOfInjury?: string;
   surgeryHospital?: string; // e.g. Vaishnavi Neuro Hospital, Allahabad
   operatingSurgeon?: string; // e.g. Dr. Prakash Khetan
+  operatingSurgeonRecord?: string; // e.g. Guinness Book of World Records holder for removing 296 cysts from brain successfully
   surgeryDate?: string; // e.g. May 30, 2022
   mriFindings?: string; // Verified MRI Impression
-  rehabCenter: string; // e.g. Neurigo360
-  physiotherapistName: string; // e.g. Dr. Pratap
+  rehabCenter: string; // e.g. Neurigo360 Advance Neuro Rehabilitation Centre, Greater Noida Paramount Golf Foreste
+  rehabCenterAddress?: string; // Greater Noida Paramount Golf Foreste
+  physiotherapistName: string; // e.g. Dr. Pratap Kunwar Singh - BPT., MPT.
+  physiotherapistTitle?: string; // Young Founder / Physiotherapist
   physiotherapistAvatar?: string;
+  associatePhysiotherapistName?: string; // e.g. Dr. Shakal Dev Gonda - BPT., MPT. Physiotherapist
   therapistConcern: string; // Clinical concern & urgency
   clinicalGoal: string; // Primary clinical objective
   dailyChallenges?: string[]; // e.g. Spasticity, Foot Drop, Fear of Falling, etc.
@@ -151,6 +156,7 @@ export interface Campaign {
     youtube?: string;
   };
   campaignSlug: string;
+  livePublicUrl?: string;
   medicalInfo?: PatientMedicalInfo;
   exerciseVideos?: RehabExerciseVideo[];
   medicalDocuments?: MedicalDocument[];

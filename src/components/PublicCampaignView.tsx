@@ -88,76 +88,37 @@ export const PublicCampaignView: React.FC = () => {
         </div>
       )}
 
-      {/* Quick Creator Photo & Real QR Bar */}
-      <div className="mb-4 bg-emerald-50 border border-emerald-200/90 rounded-2xl p-3 flex flex-wrap items-center justify-between gap-2.5">
-        <div className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold text-xs shrink-0">
-            <Camera className="w-4 h-4" />
-          </div>
-          <div className="text-xs text-emerald-950">
-            <span className="font-bold">Real Photos &amp; Verified QR:</span> Tap to upload your real photos &amp; official eSewa/SBI QR screenshots directly.
-          </div>
-        </div>
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => {
-              setPhotoUploadFocus('avatar');
-              setIsPhotoUploadOpen(true);
-            }}
-            className="px-3 py-1 bg-white hover:bg-emerald-100 text-emerald-900 border border-emerald-300 text-xs font-semibold rounded-lg transition-colors flex items-center gap-1 shadow-2xs"
-          >
-            <Upload className="w-3 h-3" />
-            <span>Upload Real Photos</span>
-          </button>
-          <button
-            onClick={() => setIsDonateModalOpen(true)}
-            className="px-3 py-1 bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-semibold rounded-lg transition-colors flex items-center gap-1 shadow-2xs"
-          >
-            <QrCode className="w-3 h-3" />
-            <span>Test Real Scannable QR</span>
-          </button>
-        </div>
-      </div>
-
       {/* Hero Visual Banner */}
       <div className="relative w-full aspect-[16/9] sm:aspect-[21/9] rounded-2xl overflow-hidden bg-slate-900 shadow-sm group">
         <img
-          src={resolveImageUrl(campaign.heroBanner)}
+          src={resolveImageUrl(campaign.heroBanner || './images/bibek_cover_photo_real.webp')}
           alt={campaign.title}
           referrerPolicy="no-referrer"
           className="w-full h-full object-cover"
           onError={(e) => {
             const target = e.currentTarget;
-            const fallback = resolveImageUrl('og_cover.jpg');
-            if (target.src !== fallback) {
-              target.src = fallback;
+            const fallbackRemote = 'https://i.postimg.cc/HxzVYR0H/fbafd65cd7b5e3bb597bfa2e50abb7e6.webp';
+            if (target.src !== fallbackRemote) {
+              target.src = fallbackRemote;
             }
           }}
         />
 
-        {/* Change Cover Photo Trigger Button */}
-        <button
-          onClick={() => {
-            setPhotoUploadFocus('banner');
-            setIsPhotoUploadOpen(true);
-          }}
-          className="absolute top-3 right-3 px-3 py-1.5 rounded-xl bg-slate-900/80 hover:bg-slate-900 text-white text-xs font-semibold backdrop-blur-md border border-white/20 shadow-md flex items-center gap-1.5 transition-all active:scale-95 z-10"
-          title="Upload or change real cover photo"
-        >
-          <Camera className="w-3.5 h-3.5 text-emerald-400" />
-          <span>Upload Real Cover Photo</span>
-        </button>
-
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/30 to-transparent flex flex-col justify-end p-4 sm:p-6 text-white">
-          <div className="flex items-center gap-2 text-xs font-medium text-emerald-400 mb-1">
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent flex flex-col justify-end p-4 sm:p-6 text-white">
+          <div className="flex items-center gap-2 text-xs font-semibold text-emerald-400 mb-1.5">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span>Active Verified Patient Medical Fund</span>
+            <span>Verified SCI Patient Recovery Fund</span>
             <span aria-hidden="true">·</span>
             <span>{campaign.category}</span>
           </div>
-          <h1 className="text-xl sm:text-3xl font-extrabold tracking-tight text-white line-clamp-2">
+          <h1 className="text-xl sm:text-3xl font-extrabold tracking-tight text-white leading-tight">
             {campaign.title}
           </h1>
+          {campaign.tagline && (
+            <p className="text-xs sm:text-sm text-slate-200 mt-2 font-normal line-clamp-2 leading-relaxed">
+              {campaign.tagline}
+            </p>
+          )}
         </div>
       </div>
 
@@ -170,22 +131,22 @@ export const PublicCampaignView: React.FC = () => {
               setPhotoUploadFocus('avatar');
               setIsPhotoUploadOpen(true);
             }}
-            title="Tap to upload real profile photo"
+            title="Bibek Bhandari Profile"
           >
             <img
-              src={resolveImageUrl(campaign.creatorAvatar)}
+              src={resolveImageUrl(campaign.creatorAvatar || './images/bibek_profile_real.jpg')}
               alt={campaign.creatorName}
               referrerPolicy="no-referrer"
               className="w-14 h-14 rounded-full object-cover border-2 border-white shadow-sm transition-transform group-hover:scale-105"
               onError={(e) => {
                 const target = e.currentTarget;
-                const fallback = resolveImageUrl('og_photo.jpg');
-                if (target.src !== fallback) {
-                  target.src = fallback;
+                const fallbackRemote = 'https://i.postimg.cc/mZ6gmQ8d/IMG-7096.jpg';
+                if (target.src !== fallbackRemote) {
+                  target.src = fallbackRemote;
                 }
               }}
             />
-            <div className="absolute inset-0 rounded-full bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-[10px] font-bold">
+            <div className="absolute inset-0 rounded-full bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-[10px] font-bold">
               <Camera className="w-4 h-4" />
             </div>
             <div className="absolute -bottom-1 -right-1 p-1 rounded-full bg-emerald-600 text-white border-2 border-white shadow-xs">
@@ -464,33 +425,43 @@ export const PublicCampaignView: React.FC = () => {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <div className="space-y-0.5">
-                <div className="flex items-center gap-2">
+              <div className="space-y-1">
+                <div className="flex flex-wrap items-center gap-2">
                   <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-emerald-800 text-emerald-200">
                     Clinical Neuro-Rehab Oversight
                   </span>
-                  <span className="text-xs text-emerald-400 font-medium">
-                    Verified Physician Prescribed
+                  <span className="text-xs text-amber-300 font-semibold flex items-center gap-1">
+                    <span>🏆</span>
+                    <span>Surgeon Dr. Prakash Khetan (Guinness World Record Holder)</span>
                   </span>
                 </div>
                 <h3 className="text-sm sm:text-base font-bold text-white">
                   {campaign.medicalInfo.injuryDiagnosis}
                 </h3>
-                <p className="text-xs text-emerald-200/90 flex flex-wrap items-center gap-1.5">
-                  <span>Rehab Center: <strong>{campaign.medicalInfo.rehabCenter}</strong></span>
+                <div className="text-xs text-emerald-200/90 flex flex-wrap items-center gap-x-2 gap-y-1">
+                  <span>Rehab Centre: <strong>Neurigo360 Advance Neuro Rehab Centre, Greater Noida</strong></span>
                   <span aria-hidden="true">·</span>
-                  <span>Supervising PT: <strong>{campaign.medicalInfo.physiotherapistName}</strong></span>
-                </p>
+                  <span>Supervising PT: <strong>{campaign.medicalInfo.physiotherapistName}</strong> &amp; <strong>Dr. Shakal Dev Gonda (BPT., MPT.)</strong></span>
+                </div>
               </div>
             </div>
 
-            <button
-              onClick={() => setIsLegalGuideOpen(true)}
-              className="shrink-0 px-3 py-1.5 text-xs font-semibold rounded-xl bg-white/10 hover:bg-white/20 text-emerald-300 border border-emerald-600/50 transition-colors flex items-center gap-1.5"
-            >
-              <ShieldCheck className="w-4 h-4 text-emerald-400" />
-              <span>Legal &amp; Medical Disclosure</span>
-            </button>
+            <div className="flex items-center gap-2 shrink-0">
+              <button
+                onClick={() => setActiveTab('medical')}
+                className="px-3 py-1.5 text-xs font-semibold rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white transition-colors flex items-center gap-1.5 shadow-xs"
+              >
+                <FileText className="w-3.5 h-3.5" />
+                <span>View Medical Records</span>
+              </button>
+              <button
+                onClick={() => setIsLegalGuideOpen(true)}
+                className="px-3 py-1.5 text-xs font-semibold rounded-xl bg-white/10 hover:bg-white/20 text-emerald-300 border border-emerald-600/50 transition-colors flex items-center gap-1.5"
+              >
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                <span className="hidden sm:inline">Legal &amp; Disclosure</span>
+              </button>
+            </div>
           </div>
         </div>
       )}

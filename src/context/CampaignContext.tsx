@@ -65,28 +65,65 @@ interface CampaignContextType {
 
 const CampaignContext = createContext<CampaignContextType | undefined>(undefined);
 
-const LOCAL_STORAGE_KEY_CAMPAIGN = 'creatorfund_campaign_v5';
-const LOCAL_STORAGE_KEY_DONATIONS = 'creatorfund_donations_v5';
-const LOCAL_STORAGE_KEY_UPDATES = 'creatorfund_updates_v5';
+const LOCAL_STORAGE_KEY_CAMPAIGN = 'creatorfund_campaign_v10';
+const LOCAL_STORAGE_KEY_DONATIONS = 'creatorfund_donations_v10';
+const LOCAL_STORAGE_KEY_UPDATES = 'creatorfund_updates_v10';
 
 export const CampaignProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [campaign, setCampaign] = useState<Campaign>(() => {
     try {
+      // Purge obsolete cache keys that stored AI stock photos
+      if (typeof window !== 'undefined') {
+        ['creatorfund_campaign_v1', 'creatorfund_campaign_v2', 'creatorfund_campaign_v3', 'creatorfund_campaign_v4', 'creatorfund_campaign_v5', 'creatorfund_campaign_v6', 'creatorfund_campaign_v7', 'creatorfund_campaign_v8', 'creatorfund_campaign_v9'].forEach(k => {
+          localStorage.removeItem(k);
+        });
+      }
       const saved = localStorage.getItem(LOCAL_STORAGE_KEY_CAMPAIGN);
       if (!saved) return initialCampaign;
       const parsed: Campaign = JSON.parse(saved);
-      // Ensure official QR images and photos are always present
-      if (!parsed.payments?.esewaQrImage || parsed.payments.esewaQrImage.trim() === '') {
+      // Ensure real official QR images and photos are always present
+      if (
+        !parsed.payments?.esewaQrImage ||
+        parsed.payments.esewaQrImage.trim() === '' ||
+        parsed.payments.esewaQrImage.includes('1790321524240') ||
+        parsed.payments.esewaQrImage.includes('esewa_official_qr')
+      ) {
         parsed.payments = { ...(parsed.payments || {}), esewaQrImage: initialCampaign.payments.esewaQrImage };
       }
-      if (!parsed.payments?.bankQrImage || parsed.payments.bankQrImage.trim() === '') {
+      if (
+        !parsed.payments?.bankQrImage ||
+        parsed.payments.bankQrImage.trim() === '' ||
+        parsed.payments.bankQrImage.includes('1790321539674') ||
+        parsed.payments.bankQrImage.includes('sbi_bank_nepal_qr')
+      ) {
         parsed.payments = { ...(parsed.payments || {}), bankQrImage: initialCampaign.payments.bankQrImage };
       }
-      if (!parsed.creatorAvatar || parsed.creatorAvatar.includes('/src/assets/')) {
+      if (
+        !parsed.creatorAvatar ||
+        parsed.creatorAvatar.includes('/src/assets/') ||
+        parsed.creatorAvatar.includes('1790321487796') ||
+        parsed.creatorAvatar.includes('creator_avatar') ||
+        parsed.creatorAvatar.includes('bibek_bhandari_portrait')
+      ) {
         parsed.creatorAvatar = initialCampaign.creatorAvatar;
       }
-      if (!parsed.heroBanner || parsed.heroBanner.includes('/src/assets/')) {
+      if (
+        !parsed.heroBanner ||
+        parsed.heroBanner.includes('/src/assets/') ||
+        parsed.heroBanner.includes('1790321508089') ||
+        parsed.heroBanner.includes('creator_hero') ||
+        parsed.heroBanner.includes('bibek_recovery_hero')
+      ) {
         parsed.heroBanner = initialCampaign.heroBanner;
+      }
+      if (!parsed.medicalInfo?.physiotherapistName?.includes('Pratap Kunwar Singh') || !parsed.medicalInfo?.operatingSurgeonRecord) {
+        parsed.medicalInfo = initialCampaign.medicalInfo;
+        parsed.tagline = initialCampaign.tagline;
+        parsed.story = initialCampaign.story;
+        parsed.budgetBreakdown = initialCampaign.budgetBreakdown;
+      }
+      if (!parsed.livePublicUrl || parsed.livePublicUrl.includes('run.app')) {
+        parsed.livePublicUrl = initialCampaign.livePublicUrl || 'https://bbibek899-dot.github.io/bibek-bhandari-sci-fund/';
       }
       return parsed;
     } catch {

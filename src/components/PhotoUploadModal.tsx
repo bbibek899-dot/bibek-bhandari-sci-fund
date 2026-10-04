@@ -229,9 +229,14 @@ export const PhotoUploadModal: React.FC<PhotoUploadModalProps> = ({
               <div className="text-center">
                 <div className="relative inline-block">
                   <img
-                    src={resolveImageUrl(campaign.creatorAvatar)}
+                    src={resolveImageUrl(campaign.creatorAvatar || './images/bibek_profile_real.jpg')}
                     alt="Bibek Bhandari Profile"
                     className="w-32 h-32 rounded-full object-cover border-4 border-emerald-500/20 shadow-md mx-auto"
+                    onError={(e) => {
+                      const target = e.currentTarget;
+                      const fallback = 'https://i.postimg.cc/mZ6gmQ8d/IMG-7096.jpg';
+                      if (target.src !== fallback) target.src = fallback;
+                    }}
                   />
                   <button
                     onClick={() => avatarInputRef.current?.click()}
@@ -275,9 +280,14 @@ export const PhotoUploadModal: React.FC<PhotoUploadModalProps> = ({
               <div className="text-center">
                 <div className="relative rounded-2xl overflow-hidden border border-slate-200 aspect-[16/9] bg-slate-900 shadow-md">
                   <img
-                    src={resolveImageUrl(campaign.heroBanner)}
+                    src={resolveImageUrl(campaign.heroBanner || './images/bibek_cover_photo_real.webp')}
                     alt="Cover Banner"
                     className="w-full h-full object-cover"
+                    onError={(e) => {
+                      const target = e.currentTarget;
+                      const fallback = 'https://i.postimg.cc/HxzVYR0H/fbafd65cd7b5e3bb597bfa2e50abb7e6.webp';
+                      if (target.src !== fallback) target.src = fallback;
+                    }}
                   />
                   <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
                     <button
@@ -328,7 +338,16 @@ export const PhotoUploadModal: React.FC<PhotoUploadModalProps> = ({
                   <div className="text-xs font-bold text-emerald-900">Official eSewa QR</div>
                   <div className="w-24 h-24 mx-auto rounded-lg overflow-hidden bg-white border border-emerald-300 p-1 flex items-center justify-center">
                     {campaign.payments.esewaQrImage ? (
-                      <img src={resolveImageUrl(campaign.payments.esewaQrImage)} alt="eSewa QR" className="w-full h-full object-contain" />
+                      <img
+                        src={resolveImageUrl(campaign.payments.esewaQrImage)}
+                        alt="eSewa QR"
+                        className="w-full h-full object-contain"
+                        onError={(e) => {
+                          const target = e.currentTarget;
+                          const fallback = 'https://i.postimg.cc/sxz98kjQ/FB-IMG-1745995717385.jpg';
+                          if (target.src !== fallback) target.src = fallback;
+                        }}
+                      />
                     ) : (
                       <span className="text-[10px] text-slate-400">No screenshot</span>
                     )}
@@ -355,7 +374,16 @@ export const PhotoUploadModal: React.FC<PhotoUploadModalProps> = ({
                   <div className="text-xs font-bold text-blue-900">SBI Bank QR</div>
                   <div className="w-24 h-24 mx-auto rounded-lg overflow-hidden bg-white border border-blue-300 p-1 flex items-center justify-center">
                     {campaign.payments.bankQrImage ? (
-                      <img src={resolveImageUrl(campaign.payments.bankQrImage)} alt="SBI Bank QR" className="w-full h-full object-contain" />
+                      <img
+                        src={resolveImageUrl(campaign.payments.bankQrImage)}
+                        alt="SBI Bank QR"
+                        className="w-full h-full object-contain"
+                        onError={(e) => {
+                          const target = e.currentTarget;
+                          const fallback = 'https://i.postimg.cc/SNTC72z3/Messenger-creation-E6A982EE-6F9F-4171-8C58-D841D0C94FCF.jpg';
+                          if (target.src !== fallback) target.src = fallback;
+                        }}
+                      />
                     ) : (
                       <span className="text-[10px] text-slate-400">No screenshot</span>
                     )}

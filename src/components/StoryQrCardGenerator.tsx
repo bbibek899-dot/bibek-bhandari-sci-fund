@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import QRCode from 'qrcode';
 import { useCampaign } from '../context/CampaignContext';
 import { Donation } from '../types/fundraising';
+import { resolveImageUrl } from '../utils/imageUtils';
 import { Download, Copy, Check, Sparkles, Smartphone, QrCode, Heart, Share2, Layers, RefreshCw } from 'lucide-react';
 
 export const StoryQrCardGenerator: React.FC = () => {
@@ -30,9 +31,9 @@ export const StoryQrCardGenerator: React.FC = () => {
   const handleCopyStoryCopy = () => {
     let copyText = '';
     if (cardType === 'shoutout' && activeDonation) {
-      copyText = `Huge heartfelt gratitude to ${activeDonation.donorName} for supporting my neuro-rehabilitation with NPR ${activeDonation.amount.toLocaleString()}! We have raised NPR ${totalVerifiedRaised.toLocaleString()} so far for my 3.5-year intensive therapy at Neurigo360. Tap the link in bio to stand with me! ❤️🙏`;
+      copyText = `Huge heartfelt gratitude to ${activeDonation.donorName} for supporting my neuro-rehabilitation with NPR ${activeDonation.amount.toLocaleString()}! We have raised NPR ${totalVerifiedRaised.toLocaleString()} so far for my 3.5-year intensive therapy at Neurigo360 Advance Neuro Rehab Centre under Dr. Pratap Kunwar Singh. Tap link in bio to stand with me! ❤️🙏`;
     } else if (cardType === 'pitch_story') {
-      copyText = `Fighting to walk again after a sudden D1-D5 spinal cord injury in 2022. Every rupee fuels daily neuro-physiotherapy at Neurigo360 with Dr. Pratap. Target: NPR 75 Lakhs for 3.5 years. Tap link sticker or eSewa: ${campaign.payments.esewaId} / Nepal SBI Bank: ${campaign.payments.accountNumber}`;
+      copyText = `Fighting to walk again after sudden D1-D5 spinal injury and emergency open surgery by Dr. Prakash Khetan (Guinness World Record Holder). Daily therapy at Neurigo360 Greater Noida with Dr. Pratap Kunwar Singh & Dr. Shakal Dev Gonda. Target: NPR 75 Lakhs. eSewa: ${campaign.payments.esewaId} / Nepal SBI Bank: ${campaign.payments.accountNumber}`;
     } else {
       copyText = `Scan to support Bibek Bhandari's SCI Recovery Fund! Accepts eSewa (${campaign.payments.esewaId}), Khalti (${campaign.payments.khaltiId}), and ${campaign.payments.bankName} (A/C: ${campaign.payments.accountNumber}, ${campaign.payments.accountName}). 100% direct personal medical fund.`;
     }
@@ -225,10 +226,15 @@ export const StoryQrCardGenerator: React.FC = () => {
             <div className="relative z-10 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <img
-                  src={campaign.creatorAvatar}
+                  src={resolveImageUrl(campaign.creatorAvatar || './images/bibek_profile_real.jpg')}
                   alt={campaign.creatorName}
                   referrerPolicy="no-referrer"
                   className="w-9 h-9 rounded-full object-cover border border-white/20"
+                  onError={(e) => {
+                    const target = e.currentTarget;
+                    const fallback = 'https://i.postimg.cc/mZ6gmQ8d/IMG-7096.jpg';
+                    if (target.src !== fallback) target.src = fallback;
+                  }}
                 />
                 <div>
                   <div className="text-xs font-bold leading-tight">{campaign.creatorName}</div>
@@ -261,7 +267,7 @@ export const StoryQrCardGenerator: React.FC = () => {
                       3.5 Yrs Intensive Neuro-Rehabilitation &amp; Mobility
                     </h3>
                     <p className="text-xs opacity-80 mt-1 line-clamp-2">
-                      Daily physiotherapy at Neurigo360 with Dr. Pratap. Overcoming foot drop &amp; fighting to walk again.
+                      Daily physiotherapy at Neurigo360 Greater Noida with Dr. Pratap Kunwar Singh & Dr. Shakal Dev Gonda. Overcoming foot drop &amp; fighting to walk again.
                     </p>
                   </div>
 

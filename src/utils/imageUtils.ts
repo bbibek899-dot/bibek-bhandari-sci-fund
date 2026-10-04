@@ -24,6 +24,25 @@ export const resolveImageUrl = (url?: string): string => {
   if (clean.startsWith('/')) {
     clean = clean.slice(1);
   }
+
+  // Automatic reroute from old stock images to verified real photos
+  if (clean.includes('1790321508089') || clean.includes('creator_hero') || clean.includes('bibek_recovery_hero')) {
+    clean = 'images/bibek_cover_photo_real.jpg';
+  } else if (clean.includes('1790321487796') || clean.includes('creator_avatar') || clean.includes('bibek_bhandari_portrait')) {
+    clean = 'images/bibek_profile_real.jpg';
+  } else if (clean.includes('1790321524240') || clean.includes('esewa_official_qr')) {
+    clean = 'images/esewa_real_official_qr.jpg';
+  } else if (clean.includes('1790321539674') || clean.includes('sbi_bank_nepal_qr')) {
+    clean = 'images/sbi_bank_nepal_real_qr.jpg';
+  }
+
+  // On GitHub Pages, ensure proper absolute repo path resolution even without trailing slash
+  if (typeof window !== 'undefined' && window.location.hostname.includes('github.io')) {
+    const pathSegments = window.location.pathname.split('/').filter(Boolean);
+    const repoSegment = pathSegments.length > 0 ? pathSegments[0] : 'bibek-bhandari-sci-fund';
+    return `/${repoSegment}/${clean}`;
+  }
+
   const base = import.meta.env.BASE_URL || './';
   const prefix = base.endsWith('/') ? base : `${base}/`;
   return `${prefix}${clean}`;

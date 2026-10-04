@@ -98,15 +98,15 @@ export const MedicalPortfolioView: React.FC = () => {
       phase: 'Phase 2',
       date: 'May 30, 2022',
       title: 'Emergency D1-D5 Laminectomy & Cord Decompression',
-      subtitle: 'Neuro-Surgical Intervention',
-      description: 'Under the surgical leadership of Dr. Prakash Khetan at Vaishnavi Neuro Hospital in Allahabad, emergency multi-level D1-D5 dorsal laminectomy was executed to relieve severe spinal canal compression and preserve viability of motor pathways.',
+      subtitle: 'Open Neuro-Surgical Intervention',
+      description: 'Under the surgical leadership of Neurosurgeon Dr. Prakash Khetan (who holds the Guinness Book of World Records for removing 296 cysts from brain successfully) at Vaishnavi Neuro Hospital in Allahabad, emergency multi-level open D1-D5 dorsal laminectomy was executed to relieve severe spinal canal compression and preserve viability of motor pathways.',
       hospitalOrCenter: 'Vaishnavi Neuro Hospital, Allahabad',
-      physicianOrTherapist: 'Dr. Prakash Khetan (Senior Neurosurgeon)',
+      physicianOrTherapist: 'Neurosurgeon Dr. Prakash Khetan (Guinness World Record Holder)',
       status: 'completed',
       keyTakeaways: [
-        'Surgical cord decompression successful',
-        'Thoracic laminectomy executed across D1 to D5',
-        'Long-term neuroplastic rehabilitation protocol prescribed'
+        'Surgical cord decompression successful via open thoracic laminectomy D1-D5',
+        'Intact motor-sparing incomplete spinal cord pattern confirmed',
+        'Uninterrupted 3.5-year daily neuroplastic rehabilitation protocol prescribed'
       ]
     },
     {
@@ -129,10 +129,10 @@ export const MedicalPortfolioView: React.FC = () => {
       phase: 'Phase 4',
       date: '2025 – Present',
       title: 'Intensive Daily Neuro-Rehabilitation at Neurigo360',
-      subtitle: 'Clinical Supervision under Dr. Pratap',
-      description: 'Structured daily physiotherapy sessions: neuromuscular electrical stimulation (NMES/FES) for dormant peroneal nerves, isometric quadriceps activation, core stabilization, and targeted resistance training.',
-      hospitalOrCenter: 'Neurigo360 Rehabilitation, Nepal',
-      physicianOrTherapist: 'Dr. Pratap (Lead Neuro-Physiotherapist)',
+      subtitle: 'Clinical Supervision under Dr. Pratap Kunwar Singh & Dr. Shakal Dev Gonda',
+      description: 'Structured daily neuro-physiotherapy sessions at Neurigo360 Advance Neuro Rehabilitation Centre, Greater Noida Paramount Golf Foreste: neuromuscular electrical stimulation (NMES/FES) for dormant peroneal nerves, isometric quadriceps activation, core stabilization, and targeted resistance training.',
+      hospitalOrCenter: 'Neurigo360 Advance Neuro Rehabilitation Centre, Greater Noida Paramount Golf Foreste',
+      physicianOrTherapist: 'Dr. Pratap Kunwar Singh (Founder/PT) & Dr. Shakal Dev Gonda (PT)',
       status: 'current',
       badgeText: 'Active Daily Treatment',
       keyTakeaways: [
@@ -320,7 +320,7 @@ export const MedicalPortfolioView: React.FC = () => {
             </h2>
 
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-              Complete clinical documentation for donor transparency: emergency <strong>D1-D5 thoracic laminectomy</strong> performed at <strong>Vaishnavi Neuro Hospital in Allahabad</strong> by <strong>Dr. Prakash Khetan</strong>, followed by daily neuro-rehabilitation at <strong>Neurigo360</strong> under <strong>Dr. Pratap</strong>.
+              Complete clinical documentation for donor transparency: emergency <strong>open D1-D5 thoracic laminectomy</strong> performed at <strong>Vaishnavi Neuro Hospital in Allahabad</strong> by <strong>Neurosurgeon Dr. Prakash Khetan</strong> (Guinness Book of World Records holder), followed by daily neuro-rehabilitation at <strong>Neurigo360 Advance Neuro Rehabilitation Centre, Greater Noida Paramount Golf Foreste</strong> under <strong>Dr. Pratap Kunwar Singh (BPT., MPT.)</strong> and <strong>Dr. Shakal Dev Gonda (BPT., MPT.)</strong>.
             </p>
           </div>
 
@@ -355,13 +355,19 @@ export const MedicalPortfolioView: React.FC = () => {
           <div className="bg-slate-800/80 p-3 rounded-xl border border-slate-700/60">
             <div className="text-[10px] text-slate-400 uppercase font-semibold">Operating Neurosurgeon</div>
             <div className="font-bold text-white text-xs sm:text-sm mt-0.5">Dr. Prakash Khetan</div>
-            <div className="text-[11px] text-slate-300">Vaishnavi Neuro Hospital, Allahabad</div>
+            <div className="text-[11px] text-amber-300 font-semibold">Guinness World Record Holder</div>
           </div>
 
           <div className="bg-slate-800/80 p-3 rounded-xl border border-slate-700/60">
-            <div className="text-[10px] text-slate-400 uppercase font-semibold">Supervising Physiotherapist</div>
-            <div className="font-bold text-white text-xs sm:text-sm mt-0.5">Dr. Pratap (PT)</div>
-            <div className="text-[11px] text-emerald-400">Neurigo360 Rehabilitation</div>
+            <div className="text-[10px] text-slate-400 uppercase font-semibold">Lead Physiotherapist / Founder</div>
+            <div className="font-bold text-white text-xs sm:text-sm mt-0.5">Dr. Pratap Kunwar Singh</div>
+            <div className="text-[11px] text-emerald-400">BPT., MPT. · Neurigo360 Founder</div>
+          </div>
+
+          <div className="bg-slate-800/80 p-3 rounded-xl border border-slate-700/60">
+            <div className="text-[10px] text-slate-400 uppercase font-semibold">Physiotherapist (Neurigo360)</div>
+            <div className="font-bold text-white text-xs sm:text-sm mt-0.5">Dr. Shakal Dev Gonda</div>
+            <div className="text-[11px] text-slate-300">BPT., MPT. · Greater Noida</div>
           </div>
 
           <div className="bg-slate-800/80 p-3 rounded-xl border border-slate-700/60">
@@ -875,62 +881,132 @@ export const MedicalPortfolioView: React.FC = () => {
       {/* SECTION 5: CLINICAL PHYSICIAN & 3.5-YEAR PLAN */}
       {portfolioTab === 'physician' && (
         <div className="space-y-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
             
             {/* Dr. Prakash Khetan & Allahabad Hospital Card */}
-            <div className="bg-white rounded-3xl p-5 sm:p-6 border border-slate-200 shadow-xs space-y-4">
-              <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
-                <div className="w-12 h-12 rounded-2xl bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-lg">
-                  <Building className="w-6 h-6" />
+            <div className="bg-white rounded-3xl p-5 border border-slate-200 shadow-xs space-y-3 flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
+                  <div className="w-12 h-12 rounded-2xl bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-lg shrink-0">
+                    <Building className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-bold text-slate-900 leading-snug">
+                      Neurosurgeon Dr. Prakash Khetan
+                    </h4>
+                    <p className="text-[11px] text-slate-500">
+                      Senior Neurosurgeon · Vaishnavi Neuro Hospital, Allahabad
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="text-base font-bold text-slate-900">
-                    Vaishnavi Neuro Hospital, Allahabad
-                  </h4>
-                  <p className="text-xs text-slate-500">
-                    Surgical Center · Operating Neurosurgeon: Dr. Prakash Khetan
-                  </p>
-                </div>
-              </div>
 
-              <div className="text-xs text-slate-700 leading-relaxed space-y-2">
-                <p>
-                  <strong>Surgical Record (May 30, 2022):</strong> Dr. Prakash Khetan performed emergency <strong>D1-D5 dorsal laminectomy</strong> to decompress severe thoracic cord impingement following acute paraparesis.
-                </p>
-                <div className="p-3 bg-blue-50/80 rounded-xl border border-blue-200 text-blue-950 space-y-1">
-                  <div className="font-bold text-blue-900">Clinical Prognosis:</div>
-                  <p className="text-[11px] leading-relaxed">
-                    Spinal cord was intact but exhibited severe focal myelopathy at D2/D3 and D3/D4. Incomplete motor-sparing injury pattern confirms that functional neural recovery is biologically possible if, and only if, continuous intensive physiotherapy is delivered.
+                {/* World Record Badge */}
+                <div className="p-2.5 bg-amber-50 border border-amber-200 rounded-xl text-amber-950 space-y-0.5">
+                  <div className="flex items-center gap-1.5 font-bold text-xs text-amber-900">
+                    <Award className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+                    <span>Guinness Book of World Records Holder</span>
+                  </div>
+                  <p className="text-[11px] leading-relaxed text-amber-900/90">
+                    Holds the world record for removing <strong>296 cysts from brain successfully</strong>. Performed Bibek's open emergency D1-D5 dorsal laminectomy.
                   </p>
+                </div>
+
+                <div className="text-xs text-slate-700 leading-relaxed space-y-2">
+                  <p>
+                    <strong>Open Surgery Record (May 30, 2022):</strong> Emergency <strong>D1-D5 dorsal laminectomy</strong> performed at Vaishnavi Neuro Hospital to decompress acute spinal cord impingement.
+                  </p>
+                  <div className="p-2.5 bg-blue-50/80 rounded-xl border border-blue-200 text-blue-950 space-y-0.5">
+                    <div className="font-bold text-[11px] text-blue-900">Surgical Impression:</div>
+                    <p className="text-[11px] leading-relaxed">
+                      Motor-sparing incomplete spinal cord condition. Preserved pathways make functional recovery achievable through uninterrupted long-term physiotherapy.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Dr. Pratap & Neurigo360 Card */}
-            <div className="bg-white rounded-3xl p-5 sm:p-6 border border-slate-200 shadow-xs space-y-4">
-              <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
-                <div className="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-lg">
-                  <Stethoscope className="w-6 h-6" />
+            {/* Dr. Pratap Kunwar Singh & Neurigo360 Card */}
+            <div className="bg-white rounded-3xl p-5 border border-slate-200 shadow-xs space-y-3 flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
+                  <div className="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-lg shrink-0">
+                    <Stethoscope className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-bold text-slate-900 leading-snug">
+                      Dr. Pratap Kunwar Singh - BPT., MPT.
+                    </h4>
+                    <p className="text-[11px] text-emerald-700 font-semibold">
+                      Young Founder / Physiotherapist
+                    </p>
+                    <p className="text-[10px] text-slate-500">
+                      Neurigo360 Advance Neuro Rehab Centre
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="text-base font-bold text-slate-900">
-                    Neurigo360 Neuro-Rehabilitation Center
-                  </h4>
-                  <p className="text-xs text-slate-500">
-                    Supervising Neuro-Physiotherapist: Dr. Pratap (Lead PT)
+
+                <div className="p-2.5 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-950 space-y-0.5">
+                  <div className="font-bold text-xs text-emerald-900">
+                    Founder of Neurigo360 Advance Neuro Rehabilitation Centre
+                  </div>
+                  <p className="text-[11px] text-emerald-800">
+                    Greater Noida Paramount Golf Foreste
                   </p>
+                </div>
+
+                <div className="text-xs text-slate-700 leading-relaxed space-y-2">
+                  <p>
+                    <strong>3.5-Year Intensive Protocol:</strong> Daily 2-to-3 hour targeted neuro-rehabilitation: quad firing, tibialis anterior NMES stimulation, and supported gait balance.
+                  </p>
+                  <div className="p-2.5 bg-emerald-50/80 rounded-xl border border-emerald-200 text-emerald-950 space-y-0.5">
+                    <div className="font-bold text-[11px] text-emerald-900">Clinical Prognosis:</div>
+                    <p className="text-[11px] leading-relaxed">
+                      "Bibek has shown real, verified muscle firing potential. The 3.5-year protocol is the essential neuroplastic window to rewire independent walking."
+                    </p>
+                  </div>
                 </div>
               </div>
+            </div>
 
-              <div className="text-xs text-slate-700 leading-relaxed space-y-2">
-                <p>
-                  <strong>Current Rehabilitation Protocol:</strong> Delivering daily 2-to-3 hour intensive sessions targeting quad re-activation, foot drop dorsiflexion, and standing frame balance.
-                </p>
-                <div className="p-3 bg-emerald-50/80 rounded-xl border border-emerald-200 text-emerald-950 space-y-1">
-                  <div className="font-bold text-emerald-900">Physiotherapist Urgency Statement:</div>
-                  <p className="text-[11px] leading-relaxed">
-                    "Bibek has shown real, verified muscle firing potential. In spinal cord injuries of this classification, interrupting therapy results in muscle fibrosis, spastic contractures, and irreversible mobility loss. The 3.5-year protocol is the scientific window to rewire independent walking."
+            {/* Dr. Shakal Dev Gonda Card */}
+            <div className="bg-white rounded-3xl p-5 border border-slate-200 shadow-xs space-y-3 flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
+                  <div className="w-12 h-12 rounded-2xl bg-teal-100 text-teal-700 flex items-center justify-center font-bold text-lg shrink-0">
+                    <Stethoscope className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-bold text-slate-900 leading-snug">
+                      Dr. Shakal Dev Gonda - BPT., MPT.
+                    </h4>
+                    <p className="text-[11px] text-teal-700 font-semibold">
+                      Physiotherapist
+                    </p>
+                    <p className="text-[10px] text-slate-500">
+                      Neurigo360 Advance Neuro Rehab Centre
+                    </p>
+                  </div>
+                </div>
+
+                <div className="p-2.5 bg-teal-50 border border-teal-200 rounded-xl text-teal-950 space-y-0.5">
+                  <div className="font-bold text-xs text-teal-900">
+                    Active Neuro-Rehabilitation Team
+                  </div>
+                  <p className="text-[11px] text-teal-800">
+                    Neurigo360, Greater Noida Paramount Golf Foreste
                   </p>
+                </div>
+
+                <div className="text-xs text-slate-700 leading-relaxed space-y-2">
+                  <p>
+                    <strong>Daily Therapy Supervision:</strong> Managing passive-active leg articulation, lower-limb spasticity control, trunk stabilization drills, and foot drop neuromuscular exercises.
+                  </p>
+                  <div className="p-2.5 bg-teal-50/80 rounded-xl border border-teal-200 text-teal-950 space-y-0.5">
+                    <div className="font-bold text-[11px] text-teal-900">Therapist Focus:</div>
+                    <p className="text-[11px] leading-relaxed">
+                      "Preventing muscle contractures while retraining the central nervous system to command lower extremity muscles daily."
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>

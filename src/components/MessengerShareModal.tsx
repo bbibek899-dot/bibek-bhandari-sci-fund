@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useCampaign } from '../context/CampaignContext';
+import { resolveImageUrl } from '../utils/imageUtils';
+import { getShareableCampaignUrl, getDomainDisplay, OFFICIAL_LIVE_URL } from '../utils/urlUtils';
 import {
   X,
   Share2,
@@ -18,7 +20,9 @@ import {
   Info,
   Compass,
   ArrowRight,
-  HelpCircle
+  HelpCircle,
+  Globe,
+  Edit3
 } from 'lucide-react';
 
 interface MessengerShareModalProps {
@@ -30,20 +34,25 @@ export const MessengerShareModal: React.FC<MessengerShareModalProps> = ({
   isOpen,
   onClose
 }) => {
-  const { campaign, showToast } = useCampaign();
+  const { campaign, updateCampaign, showToast } = useCampaign();
   const [copied, setCopied] = useState(false);
   const [copiedMsg, setCopiedMsg] = useState(false);
   const [activeTab, setActiveTab] = useState<'quick_share' | 'ios_fix' | 'preview' | 'how_to_copy'>('quick_share');
+  const [isEditingUrl, setIsEditingUrl] = useState(false);
+  const [customUrlInput, setCustomUrlInput] = useState(campaign.livePublicUrl || OFFICIAL_LIVE_URL);
 
   if (!isOpen) return null;
 
-  // The clean public URL that is guaranteed to open smoothly in Messenger, iOS, and Android
-  const cleanPublicUrl = 'https://ais-pre-v36ev7ejomvg4o2rvkenh6-712254875975.asia-southeast1.run.app';
-  const devUrl = 'https://ais-dev-v36ev7ejomvg4o2rvkenh6-712254875975.asia-southeast1.run.app';
+  // The clean real public URL that opens smoothly in Messenger, iOS, and Android
+  const cleanPublicUrl = getShareableCampaignUrl(campaign.livePublicUrl);
+  const domainDisplay = getDomainDisplay(cleanPublicUrl);
 
   const shareTitle = `Support Bibek Bhandari · Spinal Cord Injury (D1-D5) Rehabilitation Fund`;
   
-  const nepaliShareMessage = `🙏 विवेक भण्डारीको स्पाइनल कर्ड इन्जुरी (D1-D5 Laminectomy) उपचार तथा Neurigo360 दैनिक फिजियोथेरापी सहयोग अभियान
+  const nepaliShareMessage = `🙏 विवेक भण्डारीको स्पाइनल कर्ड इन्जुरी (D1-D5 open laminectomy) उपचार तथा Neurigo360 Advance Neuro Rehab Centre (Greater Noida) मा Dr. Pratap Kunwar Singh र Dr. Shakal Dev Gonda को रेखदेखमा दैनिक फिजियोथेरापी सहयोग अभियान
+
+👨‍⚕️ ओपन सर्जरी: Neurosurgeon Dr. Prakash Khetan (Guinness World Record Holder)
+🏥 फिजियोथेरापी केन्द्र: Neurigo360, Greater Noida Paramount Golf Foreste
 
 📱 प्रत्यक्ष सहयोग पठाउने खाता विवरण:
 • eSewa / Khalti: 9861452923 (Bibek / Sashita Bhandari)
@@ -55,7 +64,7 @@ export const MessengerShareModal: React.FC<MessengerShareModalProps> = ({
 
 (💡 iPhone / Messenger मा खोल्दा: माथि दायाँको ••• तीन थोप्ला थिचेर 'Open in Safari' छान्नुहोला 🙏)`;
 
-  const englishShareMessage = `Please support Bibek Bhandari's spinal cord recovery journey after emergency D1-D5 spine surgery. Daily intensive neuro-physiotherapy at Neurigo360 under Dr. Pratap. Direct eSewa & Nepal SBI Bank support with 100% Facebook public transparency:
+  const englishShareMessage = `Please support Bibek Bhandari's spinal cord recovery journey after emergency open D1-D5 spine surgery by Neurosurgeon Dr. Prakash Khetan (Guinness World Record Holder). Daily intensive neuro-physiotherapy at Neurigo360 Advance Neuro Rehabilitation Centre (Greater Noida Paramount Golf Foreste) under Dr. Pratap Kunwar Singh (Founder/PT) & Dr. Shakal Dev Gonda (PT). Direct eSewa & Nepal SBI Bank support with 100% Facebook public transparency:
 
 📱 Direct Donation Credentials:
 • eSewa / Khalti ID: 9861452923 (Bibek / Sashita Bhandari)
@@ -70,8 +79,26 @@ export const MessengerShareModal: React.FC<MessengerShareModalProps> = ({
   const handleCopyLink = () => {
     navigator.clipboard.writeText(cleanPublicUrl);
     setCopied(true);
-    showToast('Clean public link copied! Ready to paste into Messenger or WhatsApp.');
+    showToast('Real official link copied! Ready to paste into Messenger or WhatsApp.');
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleSaveCustomUrl = () => {
+    if (!customUrlInput.trim()) return;
+    let formatted = customUrlInput.trim();
+    if (!formatted.startsWith('http://') && !formatted.startsWith('https://')) {
+      formatted = `https://${formatted}`;
+    }
+    updateCampaign({ livePublicUrl: formatted });
+    setIsEditingUrl(false);
+    showToast('Official live link updated!');
+  };
+
+  const handleResetToOfficialGithub = () => {
+    updateCampaign({ livePublicUrl: OFFICIAL_LIVE_URL });
+    setCustomUrlInput(OFFICIAL_LIVE_URL);
+    setIsEditingUrl(false);
+    showToast('Reset to official GitHub Pages link!');
   };
 
   const handleCopyNepaliMsg = () => {
@@ -191,34 +218,77 @@ export const MessengerShareModal: React.FC<MessengerShareModalProps> = ({
               <div className="p-3.5 bg-emerald-50 border border-emerald-200 rounded-2xl text-xs text-emerald-950 flex items-start gap-2.5">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                 <div>
-                  <div className="font-bold text-emerald-900 text-xs">Smooth Opening Guaranteed for Friends:</div>
+                  <div className="font-bold text-emerald-900 text-xs">Official Permanent Live Link:</div>
                   <p className="text-[11px] text-emerald-800 mt-0.5 leading-relaxed">
-                    This link uses the public domain (<code className="font-mono font-bold bg-emerald-100 px-1 rounded">ais-pre-...</code>) which opens smoothly on all Android &amp; iOS phones without asking for login, and displays your cover &amp; photo on Messenger and WhatsApp!
+                    This link uses your permanent live website (<code className="font-mono font-bold bg-emerald-100 px-1 rounded">{domainDisplay}</code>) which opens smoothly for all your friends on Android &amp; iPhone without asking for login, and loads Bibek's photo and cover banner!
                   </p>
                 </div>
               </div>
 
               {/* Main Copy Link Block */}
               <div className="space-y-1.5">
-                <label className="text-xs font-bold text-slate-700 flex items-center justify-between">
-                  <span>Official Public Link for Friends:</span>
-                  <span className="text-[10px] text-emerald-700 font-semibold bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
-                    Always share this link
-                  </span>
-                </label>
-                <div className="flex items-center gap-2 bg-slate-50 border border-slate-200 p-2.5 rounded-2xl">
-                  <span className="text-xs font-mono text-slate-900 truncate flex-1 select-all font-semibold">
-                    {cleanPublicUrl}
-                  </span>
+                <div className="flex items-center justify-between text-xs font-bold text-slate-700">
+                  <div className="flex items-center gap-1.5">
+                    <Globe className="w-3.5 h-3.5 text-emerald-600" />
+                    <span>Real Public Link for Friends:</span>
+                  </div>
                   <button
                     type="button"
-                    onClick={handleCopyLink}
-                    className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition-all flex items-center gap-1.5 shrink-0 shadow-sm active:scale-95"
+                    onClick={() => setIsEditingUrl(!isEditingUrl)}
+                    className="text-[11px] text-blue-600 hover:text-blue-800 font-semibold flex items-center gap-1"
                   >
-                    {copied ? <Check className="w-4 h-4 text-emerald-300" /> : <Copy className="w-4 h-4" />}
-                    <span>{copied ? 'Copied!' : 'Copy Link'}</span>
+                    <Edit3 className="w-3 h-3" />
+                    <span>{isEditingUrl ? 'Cancel Edit' : 'Custom Link'}</span>
                   </button>
                 </div>
+
+                {isEditingUrl ? (
+                  <div className="p-3 bg-slate-50 border border-slate-300 rounded-2xl space-y-2">
+                    <label className="text-[11px] font-semibold text-slate-600 block">
+                      Edit or Enter Your Live Website Link:
+                    </label>
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="url"
+                        value={customUrlInput}
+                        onChange={(e) => setCustomUrlInput(e.target.value)}
+                        placeholder="https://your-domain.com/"
+                        className="flex-1 px-3 py-1.5 bg-white border border-slate-300 rounded-xl text-xs font-mono focus:outline-hidden focus:ring-2 focus:ring-emerald-500"
+                      />
+                      <button
+                        type="button"
+                        onClick={handleSaveCustomUrl}
+                        className="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl"
+                      >
+                        Save
+                      </button>
+                    </div>
+                    <div className="flex justify-between items-center text-[10px] text-slate-500 pt-1">
+                      <span>Default: GitHub Pages Official Link</span>
+                      <button
+                        type="button"
+                        onClick={handleResetToOfficialGithub}
+                        className="text-emerald-700 hover:underline font-semibold"
+                      >
+                        Reset to Official GitHub Pages
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-2 bg-slate-50 border border-slate-200 p-2.5 rounded-2xl">
+                    <span className="text-xs font-mono text-slate-900 truncate flex-1 select-all font-semibold">
+                      {cleanPublicUrl}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={handleCopyLink}
+                      className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition-all flex items-center gap-1.5 shrink-0 shadow-sm active:scale-95"
+                    >
+                      {copied ? <Check className="w-4 h-4 text-emerald-300" /> : <Copy className="w-4 h-4" />}
+                      <span>{copied ? 'Copied Real Link!' : 'Copy Real Link'}</span>
+                    </button>
+                  </div>
+                )}
               </div>
 
               {/* 1-Tap Send Buttons */}
@@ -387,11 +457,12 @@ export const MessengerShareModal: React.FC<MessengerShareModalProps> = ({
                 {/* Cover Image */}
                 <div className="relative aspect-[1.91/1] w-full bg-slate-900 overflow-hidden">
                   <img
-                    src="/og_cover.jpg"
+                    src={resolveImageUrl(campaign.heroBanner || './images/bibek_cover_photo_real.webp')}
                     alt="Cover Photo"
                     className="w-full h-full object-cover"
                     onError={(e) => {
-                      e.currentTarget.src = campaign.heroBanner;
+                      const fallback = 'https://i.postimg.cc/HxzVYR0H/fbafd65cd7b5e3bb597bfa2e50abb7e6.webp';
+                      if (e.currentTarget.src !== fallback) e.currentTarget.src = fallback;
                     }}
                   />
                   <div className="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-slate-950/70 text-white text-[10px] font-bold backdrop-blur-xs flex items-center gap-1">
@@ -403,22 +474,23 @@ export const MessengerShareModal: React.FC<MessengerShareModalProps> = ({
                 {/* Card Content */}
                 <div className="p-3.5 bg-slate-50 border-t border-slate-200 flex items-start gap-3">
                   <img
-                    src="/og_photo.jpg"
+                    src={resolveImageUrl(campaign.creatorAvatar || './images/bibek_profile_real.jpg')}
                     alt="Bibek Bhandari"
                     className="w-12 h-12 rounded-full object-cover border-2 border-white shadow-sm shrink-0"
                     onError={(e) => {
-                      e.currentTarget.src = campaign.creatorAvatar;
+                      const fallback = 'https://i.postimg.cc/mZ6gmQ8d/IMG-7096.jpg';
+                      if (e.currentTarget.src !== fallback) e.currentTarget.src = fallback;
                     }}
                   />
                   <div className="min-w-0 flex-1">
-                    <div className="text-[10px] uppercase font-bold text-slate-400 tracking-wider font-mono">
-                      ais-pre-v36ev7ejomvg4o2rvkenh6-712254875975.asia-southeast1.run.app
+                    <div className="text-[10px] uppercase font-bold text-emerald-700 tracking-wider font-mono">
+                      {domainDisplay}
                     </div>
                     <div className="text-xs font-bold text-slate-900 line-clamp-1 mt-0.5">
                       Bibek Bhandari · SCI Neuro-Rehabilitation &amp; Mobility Fund
                     </div>
                     <div className="text-[11px] text-slate-500 line-clamp-2 mt-0.5">
-                      Supporting Bibek Bhandari's recovery after emergency D1-D5 spinal surgery with daily intensive physiotherapy at Neurigo360 under Dr. Pratap. Direct eSewa &amp; Nepal SBI Bank support.
+                      Supporting Bibek Bhandari after open spine surgery by Dr. Prakash Khetan (Guinness World Record Holder) with daily physiotherapy at Neurigo360 Greater Noida under Dr. Pratap Kunwar Singh.
                     </div>
                   </div>
                 </div>
@@ -449,18 +521,18 @@ export const MessengerShareModal: React.FC<MessengerShareModalProps> = ({
           {/* TAB 4: HOW TO COPY LINK INSTRUCTION */}
           {activeTab === 'how_to_copy' && (
             <div className="space-y-4">
-              <div className="p-3.5 bg-amber-50 border border-amber-200 rounded-2xl space-y-2">
-                <div className="flex items-center gap-2 font-bold text-amber-900 text-xs">
-                  <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0" />
-                  <span>Why Did The Link Fail To Open Before?</span>
+              <div className="p-3.5 bg-emerald-50 border border-emerald-200 rounded-2xl space-y-2">
+                <div className="flex items-center gap-2 font-bold text-emerald-900 text-xs">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span>How To Share Seamlessly With Donors &amp; Friends</span>
                 </div>
-                <p className="text-[11px] text-amber-900 leading-relaxed">
-                  If you copied the link directly from your browser's top address bar in Google AI Studio, it started with:
+                <p className="text-[11px] text-emerald-900 leading-relaxed">
+                  Your official live website is hosted at:
                   <br />
-                  <code className="block mt-1 p-2 bg-amber-100 rounded-lg text-[10px] font-mono text-red-700 line-through">
-                    {devUrl}
+                  <code className="block mt-1 p-2 bg-white border border-emerald-300 rounded-lg text-xs font-mono font-bold text-emerald-900 select-all">
+                    {cleanPublicUrl}
                   </code>
-                  This is a <strong>private development session</strong> that requires your personal Google login. When your friend taps it in Messenger on their phone, they are blocked and see a blank screen or 403 error!
+                  This link has <strong>no login requirements</strong> and opens immediately on every iPhone, Android, and PC when shared through Facebook, Messenger, WhatsApp, or Viber.
                 </p>
               </div>
 
@@ -473,7 +545,7 @@ export const MessengerShareModal: React.FC<MessengerShareModalProps> = ({
                     1
                   </span>
                   <div className="text-xs text-slate-700">
-                    <strong>Never copy the browser address bar if it contains "ais-dev"</strong> — that link only works on your own developer screen.
+                    <strong>Never copy the browser address bar if it contains "ais-dev" or "run.app"</strong> — those are private runner environments that won't open for external friends.
                   </div>
                 </div>
 
@@ -482,7 +554,7 @@ export const MessengerShareModal: React.FC<MessengerShareModalProps> = ({
                     2
                   </span>
                   <div className="text-xs text-slate-700">
-                    <strong>Click the "Share" or "Copy Public Link" button</strong> in the top navbar or bottom-left corner of the app.
+                    <strong>Click the "Copy Real Link" or "Share" button</strong> right here in the app to automatically copy your permanent website link.
                   </div>
                 </div>
 
@@ -491,7 +563,7 @@ export const MessengerShareModal: React.FC<MessengerShareModalProps> = ({
                     3
                   </span>
                   <div className="text-xs text-slate-700">
-                    <strong>Send the copied link to your friend on Messenger or WhatsApp</strong>. It will open smoothly, load Bibek's photo and cover banner, and let them donate directly!
+                    <strong>Paste the copied link in your Facebook post or Messenger chat</strong>. Friends will see Bibek's photo and cover banner instantly and can donate directly via eSewa and Nepal SBI Bank!
                   </div>
                 </div>
               </div>
@@ -503,7 +575,7 @@ export const MessengerShareModal: React.FC<MessengerShareModalProps> = ({
                   className="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl transition-all flex items-center justify-center gap-2 shadow-xs"
                 >
                   <Check className="w-4 h-4" />
-                  <span>Copy The Correct Public Link Now</span>
+                  <span>Copy Official Live Link Now</span>
                 </button>
               </div>
             </div>

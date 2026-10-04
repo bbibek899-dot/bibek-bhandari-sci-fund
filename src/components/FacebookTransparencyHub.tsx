@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useCampaign } from '../context/CampaignContext';
+import { getShareableCampaignUrl } from '../utils/urlUtils';
 import {
   Share2,
   Copy,
@@ -57,11 +58,13 @@ ${donorListText}
 
 ${verifiedDonations.length > 15 ? `...र अन्य ${verifiedDonations.length - 15} जना सहयोगी मित्रहरू!\n` : ''}
 हाम्रो उपचार खर्चको मुख्य शीर्षकहरू:
-१. दैनिक न्युरो-फिजियोथेरापी (Neurigo360 - Dr. Pratap): ४०%
+१. दैनिक न्युरो-फिजियोथेरापी (Neurigo360 Advance Neuro Rehab Centre, Greater Noida - Dr. Pratap Kunwar Singh & Dr. Shakal Dev Gonda): ४०%
 २. क्लिनिक नजिकै अपाङ्गमैत्री बसोबास/कोठा भाडा: २०%
 ३. दैनिक औषधि तथा स्प्यास्टिसिटी/दिशा-पिसाब मेडिकल सामान: १५%
 ४. दैनिक अस्पताल तथा थेरापी आउजाउ यातायात: १३%
 ५. पोषणयुक्त खाना तथा मेडिकल उपकरणको बिजुली/महसुल: १२%
+
+शल्यक्रिया: Neurosurgeon Dr. Prakash Khetan (Guinness Book of World Records Holder द्वारा गरिएको D1-D5 open laminectomy)
 
 हाम्रो सिधा पारिवारिक बैंक तथा इसेवा खाता:
 📱 eSewa ID: ${campaign.payments.esewaId} (${campaign.payments.esewaName})
@@ -69,7 +72,7 @@ ${verifiedDonations.length > 15 ? `...र अन्य ${verifiedDonations.lengt
 🔢 A/C No: ${campaign.payments.accountNumber}
 👤 Account Holder: ${campaign.payments.accountName} (${campaign.payments.branch})
 
-🔗 आधिकारिक अभियान लिङ्क: ${typeof window !== 'undefined' ? window.location.href : 'https://creatorfund.link/@sasibibek'}
+🔗 आधिकारिक अभियान लिङ्क: ${getShareableCampaignUrl(campaign.livePublicUrl)}
 👤 आधिकारिक फेसबुक: https://www.facebook.com/share/1E1EVtPrPh/
 
 यहाँहरू सबैको माया, साथ र सहयोगको लागि म र मेरो परिवार सदैव ऋणी रहनेछौं। धन्यवाद!`;

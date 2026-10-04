@@ -138,11 +138,11 @@ export const socialScriptTemplates: SocialScriptTemplate[] = [
     description: 'Raw, gritty documentary style showing your exercise drill and clinical progress at Neurigo360.',
     content: `[0:00 - 0:04 HOOK]
 (Camera pointed at legs on exercise mat or parallel bars)
-"In 2022, sudden paralysis hit me overnight. Doctors at Vaishnavi Neuro Hospital performed a D1-D5 Laminectomy. Today I am fighting to rewire my nervous system."
+"In 2022, sudden paralysis hit me overnight. Neurosurgeon Dr. Prakash Khetan (Guinness World Record Holder) performed my emergency D1-D5 open laminectomy. Today I am fighting to rewire my nervous system."
 
 [0:05 - 0:25 SHOW THE WORK]
 (B-roll of foot drop stimulation, towel knee press, or balance drill)
-"My neuro-physiotherapist Dr. Pratap at Neurigo360 designed an intensive 3.5-year protocol to fight foot drop, spasticity, and the fear of falling. Rebuilding neural connections takes daily, uninterrupted discipline."
+"At Neurigo360 Advance Neuro Rehabilitation Centre in Greater Noida, Dr. Pratap Kunwar Singh (Founder/PT) and Dr. Shakal Dev Gonda designed an intensive 3.5-year protocol to conquer foot drop, spasticity, and the fear of falling."
 
 [0:26 - 0:45 THE DIRECT ASK]
 "Intensive daily therapy, accessible transport, and medical supplies cost NPR 75 Lakhs for 3.5 years. We're already {PROGRESS_PERCENT}% funded by our community!
@@ -179,17 +179,17 @@ DM me if you need the direct QR or bank details!"`,
     description: 'Structured long-form post for community, alumni, and relatives.',
     content: `Dear friends, family, and kind community members,
 
-My name is BIBEK BHANDARI from Chandrapur, Rautahat, Nepal. In January 2022, my life changed suddenly overnight—no accident, no fall. Severe spinal cord compression struck, and on May 30, 2022, I underwent a major D1-D5 Laminectomy at Vaishnavi Neuro Hospital, Allahabad, operated by Dr. Prakash Khetan.
+My name is BIBEK BHANDARI from Chandrapur, Rautahat, Nepal. In January 2022, my life changed suddenly overnight—no accident, no fall. Severe spinal cord compression struck, and on May 30, 2022, I underwent emergency open spine surgery (D1-D5 Laminectomy) at Vaishnavi Neuro Hospital, Allahabad, operated by Neurosurgeon Dr. Prakash Khetan (who holds the Guinness Book of World Records for removing 296 cysts from brain successfully).
 
 My MRI scan confirms severe cord compression with focal myelopathy at D2/D3 and D3/D4, alongside multilevel lumbar canal stenosis. However, because my injury is INCOMPLETE, the neural pathways are still alive.
 
 WHY UNINTERRUPTED 3.5-YEAR THERAPY IS CRITICAL:
-Under the supervision of Dr. Pratap at Neurigo360, I undergo intensive daily neuro-physiotherapy to fight severe spasticity, foot drop, muscle weakness, and the fear of falling. Halting therapy risks irreversible muscle shortening and losing the chance to walk again.
+Under the supervision of Dr. Pratap Kunwar Singh (BPT., MPT. - Young Founder / Physiotherapist) and Dr. Shakal Dev Gonda (BPT., MPT.) at Neurigo360 Advance Neuro Rehabilitation Centre, Greater Noida Paramount Golf Foreste, I undergo intensive daily neuro-physiotherapy to fight severe spasticity, foot drop, muscle weakness, and the fear of falling. Halting therapy risks irreversible muscle shortening and losing the chance to walk again.
 
 ITEMIZED 3.5-YEAR (42 MONTHS) RECOVERY BUDGET:
 🎯 3.5-Year Target: NPR {TARGET_AMOUNT} (75 Lakhs)
 🔥 Raised to date: {TOTAL_RAISED}
-✅ Daily Neuro-Physiotherapy (Neurigo360 under Dr. Pratap): NPR 30,00,000 (40%)
+✅ Daily Neuro-Physiotherapy (Neurigo360 with Dr. Pratap Kunwar Singh & Dr. Shakal Dev Gonda): NPR 30,00,000 (40%)
 ✅ Wheelchair-Accessible Housing & Rent near Clinic: NPR 15,00,000 (20%)
 ✅ Daily Medical Supplies & Bowel Management Care: NPR 11,25,000 (15%)
 ✅ Daily Accessible Transport: NPR 9,75,000 (13%)

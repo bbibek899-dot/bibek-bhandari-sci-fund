@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import QRCode from 'qrcode';
 import { useCampaign } from '../context/CampaignContext';
 import { Donation } from '../types/fundraising';
+import { getShareableCampaignUrl } from '../utils/urlUtils';
 import {
   X,
   Download,
@@ -39,11 +40,7 @@ export const DonationTicketModal: React.FC<DonationTicketModalProps> = ({
   if (!donation) return null;
 
   // Clean shareable campaign URL
-  const campaignUrl = typeof window !== 'undefined'
-    ? (window.location.origin.includes('ais-dev-') 
-        ? 'https://ais-pre-v36ev7ejomvg4o2rvkenh6-712254875975.asia-southeast1.run.app'
-        : window.location.origin)
-    : 'https://ais-pre-v36ev7ejomvg4o2rvkenh6-712254875975.asia-southeast1.run.app';
+  const campaignUrl = getShareableCampaignUrl(campaign.livePublicUrl);
 
   const ticketNumber = donation.ticketNumber || `NEPAL-SCI-2026-${donation.referenceId.slice(-6).toUpperCase() || '88219A'}`;
 
@@ -68,8 +65,9 @@ Donor: ${donation.donorName}
 Amount: NPR ${donation.amount.toLocaleString()}
 Payment Channel: ${donation.paymentMethod.toUpperCase()} (Ref: ${donation.referenceId})
 Date: ${new Date(donation.timestamp).toLocaleDateString()}
-Beneficiary: Bibek Bhandari · Spinal Cord Recovery Fund (D1-D5 Laminectomy Rehab)
-Supervising Clinic: Neurigo360 Rehabilitation (Dr. Pratap)
+Beneficiary: Bibek Bhandari · Spinal Cord Recovery Fund (D1-D5 Open Surgery Rehab)
+Operating Surgeon: Neurosurgeon Dr. Prakash Khetan (Guinness World Record Holder)
+Supervising Centre: Neurigo360 Advance Neuro Rehab Centre, Greater Noida (Dr. Pratap Kunwar Singh & Dr. Shakal Dev Gonda)
 Facebook Ledger: Logged & 100% Publicly Accountable
 Verify & Support: ${campaignUrl}`;
 
@@ -202,7 +200,11 @@ Verify & Support: ${campaignUrl}`;
               </div>
               <div className="flex items-center justify-between text-[11px]">
                 <span className="text-slate-500">Therapy Clinic:</span>
-                <span className="font-medium text-slate-800">Neurigo360 (Dr. Pratap)</span>
+                <span className="font-medium text-slate-800">Neurigo360, Greater Noida (Dr. Pratap Kunwar Singh)</span>
+              </div>
+              <div className="flex items-center justify-between text-[11px]">
+                <span className="text-slate-500">Operating Surgeon:</span>
+                <span className="font-medium text-slate-800">Dr. Prakash Khetan (Guinness World Record Holder)</span>
               </div>
             </div>
 

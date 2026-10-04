@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import QRCode from 'qrcode';
 import { useCampaign } from '../context/CampaignContext';
 import { Donation, PaymentMethodType } from '../types/fundraising';
+import { getShareableCampaignUrl } from '../utils/urlUtils';
 import {
   ShieldCheck,
   Clock,
@@ -71,11 +72,7 @@ export const DonationLedger: React.FC = () => {
   const [manualNote, setManualNote] = useState('');
 
   // Clean public campaign URL for sharing & verification QR
-  const campaignUrl = typeof window !== 'undefined'
-    ? (window.location.origin.includes('ais-dev-')
-        ? 'https://ais-pre-v36ev7ejomvg4o2rvkenh6-712254875975.asia-southeast1.run.app'
-        : window.location.origin)
-    : 'https://ais-pre-v36ev7ejomvg4o2rvkenh6-712254875975.asia-southeast1.run.app';
+  const campaignUrl = getShareableCampaignUrl(campaign.livePublicUrl);
 
   // Filter donations
   const filteredDonations = donations.filter(d => {
@@ -139,7 +136,7 @@ export const DonationLedger: React.FC = () => {
     if (lang === 'nepali') {
       return `नमस्ते ${donation.donorName} ज्यु!
 
-विवेक भण्डारीको स्पाइनल कर्ड इन्जुरी (D1-D5 Laminectomy) उपचार तथा Neurigo360 मा दैनिक फिजियोथेरापीको लागि तपाईंले गर्नुभएको रु ${donation.amount.toLocaleString()} (${donation.paymentMethod.toUpperCase()} मार्फत, Ref: ${donation.referenceId}) को अमूल्य सहयोगको लागि हृदयदेखि नै धेरै धेरै धन्यवाद व्यक्त गर्दछौं।
+विवेक भण्डारीको स्पाइनल कर्ड इन्जुरी (Neurosurgeon Dr. Prakash Khetan - Guinness World Record Holder द्वारा गरिएको D1-D5 open laminectomy शल्यक्रिया) र Neurigo360 Advance Neuro Rehabilitation Centre (Greater Noida Paramount Golf Foreste) मा Dr. Pratap Kunwar Singh (Founder/PT) तथा Dr. Shakal Dev Gonda (PT) को रेखदेखमा दैनिक फिजियोथेरापीको लागि तपाईंले गर्नुभएको रु ${donation.amount.toLocaleString()} (${donation.paymentMethod.toUpperCase()} मार्फत, Ref: ${donation.referenceId}) को अमूल्य सहयोगको लागि हृदयदेखि नै धेरै धेरै धन्यवाद व्यक्त गर्दछौं।
 
 🎫 तपाईंको आधिकारिक डोनेसन टिकट नं: ${ticketId}
 हामी तपाईंको यो सहयोगलाई १००% पारदर्शी रूपमा फेसबुकमा पनि सम्मानसहित सार्वजनिक गर्दैछौं।
@@ -154,7 +151,7 @@ export const DonationLedger: React.FC = () => {
 
     return `Dear ${donation.donorName},
 
-Heartfelt thank you for your generous medical contribution of NPR ${donation.amount.toLocaleString()} (via ${donation.paymentMethod.toUpperCase()}, Reference: ${donation.referenceId}) supporting Bibek Bhandari's spinal cord neuro-rehabilitation at Neurigo360 under Dr. Pratap.
+Heartfelt thank you for your generous medical contribution of NPR ${donation.amount.toLocaleString()} (via ${donation.paymentMethod.toUpperCase()}, Reference: ${donation.referenceId}) supporting Bibek Bhandari's spinal cord neuro-rehabilitation at Neurigo360 Advance Neuro Rehabilitation Centre (Greater Noida Paramount Golf Foreste) under Dr. Pratap Kunwar Singh (BPT., MPT. - Founder/PT) & Dr. Shakal Dev Gonda (BPT., MPT.), following emergency open spine surgery by Neurosurgeon Dr. Prakash Khetan (Guinness Book of World Records Holder).
 
 🎫 Official Donation Ticket ID: ${ticketId}
 Your support is recorded with 100% public transparency on Facebook.
@@ -177,8 +174,9 @@ Amount: NPR ${donation.amount.toLocaleString()}
 Payment Channel: ${donation.paymentMethod.toUpperCase()} (Ref: ${donation.referenceId})
 Date: ${new Date(donation.timestamp).toLocaleDateString()}
 Status: VERIFIED & CONFIRMED
-Beneficiary: Bibek Bhandari · Spinal Cord Recovery Fund (D1-D5 Laminectomy Rehab)
-Supervising Clinic: Neurigo360 Rehabilitation (Dr. Pratap)
+Beneficiary: Bibek Bhandari · Spinal Cord Recovery Fund (D1-D5 Open Surgery Rehab)
+Operating Surgeon: Neurosurgeon Dr. Prakash Khetan (Guinness World Record Holder)
+Supervising Centre: Neurigo360 Advance Neuro Rehab Centre, Greater Noida (Dr. Pratap Kunwar Singh & Dr. Shakal Dev Gonda)
 Facebook Ledger: 100% Publicly Accountable
 Verify & Support: ${campaignUrl}`;
   };
