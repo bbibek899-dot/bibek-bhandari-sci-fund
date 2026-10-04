@@ -1,0 +1,6 @@
+{
+  "name": "CreatorFund - Social Creator Fundraising Toolkit",
+  "description": "Mobile-first fundraising toolkit for creators using TikTok, Instagram, and Facebook: shareable campaign page, QR/eSewa/bank payments, automated thank-you messages, donation verification records, and social launch guides.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
