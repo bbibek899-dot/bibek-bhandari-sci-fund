@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import QRCode from 'qrcode';
 import { useCampaign } from '../context/CampaignContext';
-import { processImageFile } from '../utils/imageUtils';
+import { processImageFile, resolveImageUrl } from '../utils/imageUtils';
 import {
   Download,
   Copy,
@@ -39,16 +39,14 @@ export const RealScannableQr: React.FC<RealScannableQrProps> = ({
   const [qrDataUrl, setQrDataUrl] = useState<string>('');
   // User explicitly noted: "official qr code is working but we must zoom it little bit"
   // Defaulting to official screenshot with default 1.35x zoom!
-  const officialScreenshot =
+  const rawScreenshot =
     method === 'esewa'
       ? campaign.payments.esewaQrImage
       : campaign.payments.bankQrImage;
+  const officialScreenshot = resolveImageUrl(rawScreenshot);
 
   const hasOfficialScreenshot = Boolean(
-    officialScreenshot &&
-    officialScreenshot.trim() !== '' &&
-    !officialScreenshot.includes('esewa_official_qr_') &&
-    !officialScreenshot.includes('sbi_bank_nepal_qr_')
+    officialScreenshot && officialScreenshot.trim() !== ''
   );
 
   const [activeTab, setActiveTab] = useState<'screenshot' | 'generated'>(

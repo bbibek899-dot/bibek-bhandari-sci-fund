@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useCampaign } from '../context/CampaignContext';
 import { MedicalDocument, RecoveryPhoto, RehabExerciseVideo, ClinicalTimelineEvent } from '../types/fundraising';
-import { processImageFile } from '../utils/imageUtils';
+import { processImageFile, resolveImageUrl } from '../utils/imageUtils';
 import { AddExerciseVideoModal } from './AddExerciseVideoModal';
 import {
   FileText,
@@ -602,7 +602,7 @@ export const MedicalPortfolioView: React.FC = () => {
                     {/* Preview Thumbnail */}
                     <div className="relative aspect-[16/10] bg-slate-900 rounded-xl overflow-hidden border border-slate-200/80">
                       <img
-                        src={doc.imageUrl}
+                        src={resolveImageUrl(doc.imageUrl)}
                         alt={doc.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
@@ -740,7 +740,7 @@ export const MedicalPortfolioView: React.FC = () => {
                   <div className="space-y-3 p-3">
                     <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-slate-900">
                       <img
-                        src={photo.imageUrl}
+                        src={resolveImageUrl(photo.imageUrl)}
                         alt={photo.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
@@ -809,7 +809,7 @@ export const MedicalPortfolioView: React.FC = () => {
                   <div className="space-y-3">
                     <div className="relative aspect-[16/10] bg-slate-900">
                       <img
-                        src={ex.imageUrl}
+                        src={resolveImageUrl(ex.imageUrl)}
                         alt={ex.title}
                         className="w-full h-full object-cover"
                       />
@@ -1037,7 +1037,7 @@ export const MedicalPortfolioView: React.FC = () => {
             {/* Document Image with Zoom Scaling */}
             <div className="flex-1 overflow-auto p-4 sm:p-6 flex items-center justify-center bg-black/60 min-h-[350px]">
               <img
-                src={selectedDoc.imageUrl}
+                src={resolveImageUrl(selectedDoc.imageUrl)}
                 alt={selectedDoc.title}
                 style={{ transform: `scale(${docZoom})`, transformOrigin: 'center center' }}
                 className="max-w-full max-h-[60vh] object-contain transition-transform duration-150 rounded-lg shadow-2xl"
@@ -1116,7 +1116,7 @@ export const MedicalPortfolioView: React.FC = () => {
 
             <div className="flex-1 overflow-auto p-4 sm:p-6 flex items-center justify-center bg-black/60 min-h-[350px]">
               <img
-                src={selectedPhoto.imageUrl}
+                src={resolveImageUrl(selectedPhoto.imageUrl)}
                 alt={selectedPhoto.title}
                 style={{ transform: `scale(${photoZoom})`, transformOrigin: 'center center' }}
                 className="max-w-full max-h-[60vh] object-contain transition-transform duration-150 rounded-lg shadow-2xl"

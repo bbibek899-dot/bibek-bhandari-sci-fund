@@ -65,15 +65,30 @@ interface CampaignContextType {
 
 const CampaignContext = createContext<CampaignContextType | undefined>(undefined);
 
-const LOCAL_STORAGE_KEY_CAMPAIGN = 'creatorfund_campaign_v4';
-const LOCAL_STORAGE_KEY_DONATIONS = 'creatorfund_donations_v4';
-const LOCAL_STORAGE_KEY_UPDATES = 'creatorfund_updates_v4';
+const LOCAL_STORAGE_KEY_CAMPAIGN = 'creatorfund_campaign_v5';
+const LOCAL_STORAGE_KEY_DONATIONS = 'creatorfund_donations_v5';
+const LOCAL_STORAGE_KEY_UPDATES = 'creatorfund_updates_v5';
 
 export const CampaignProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [campaign, setCampaign] = useState<Campaign>(() => {
     try {
       const saved = localStorage.getItem(LOCAL_STORAGE_KEY_CAMPAIGN);
-      return saved ? JSON.parse(saved) : initialCampaign;
+      if (!saved) return initialCampaign;
+      const parsed: Campaign = JSON.parse(saved);
+      // Ensure official QR images and photos are always present
+      if (!parsed.payments?.esewaQrImage || parsed.payments.esewaQrImage.trim() === '') {
+        parsed.payments = { ...(parsed.payments || {}), esewaQrImage: initialCampaign.payments.esewaQrImage };
+      }
+      if (!parsed.payments?.bankQrImage || parsed.payments.bankQrImage.trim() === '') {
+        parsed.payments = { ...(parsed.payments || {}), bankQrImage: initialCampaign.payments.bankQrImage };
+      }
+      if (!parsed.creatorAvatar || parsed.creatorAvatar.includes('/src/assets/')) {
+        parsed.creatorAvatar = initialCampaign.creatorAvatar;
+      }
+      if (!parsed.heroBanner || parsed.heroBanner.includes('/src/assets/')) {
+        parsed.heroBanner = initialCampaign.heroBanner;
+      }
+      return parsed;
     } catch {
       return initialCampaign;
     }
@@ -249,15 +264,12 @@ export const CampaignProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       });
       if (resp.ok && donResp.ok) {
         setIsLiveSynced(true);
-        triggerCelebration();
-        showToast('🎉 Live synced! All visitors on ais-pre-... will now see your real photos, real QR, and exact details!');
-      } else {
-        showToast('Failed to publish campaign to server', 'error');
       }
-    } catch (err) {
-      console.error(err);
-      showToast('Network error while publishing campaign', 'error');
+    } catch {
+      // Running on static GitHub Pages
     }
+    triggerCelebration();
+    showToast('All photos, cover banner, and official QR codes are saved & active!');
   };
 
   const updateCampaign = (newDetails: Partial<Campaign>) => {

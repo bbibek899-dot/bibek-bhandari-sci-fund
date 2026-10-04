@@ -61,7 +61,7 @@ export const AddExerciseVideoModal: React.FC<AddExerciseVideoModalProps> = ({
       title: title.trim(),
       category,
       description: description.trim() || 'Prescribed neuro-physiotherapy drill at Neurigo360 under Dr. Pratap.',
-      imageUrl: imageUrl || '/src/assets/images/exercise_isometric_knee_quad_1790313410854.jpg',
+      imageUrl: imageUrl || './images/exercise_isometric_knee_quad_1790313410854.jpg',
       videoUrl: videoUrl.trim() || 'https://www.tiktok.com/@sasibibek',
       frequency: frequency.trim() || 'Daily under supervision',
       therapistNotes: therapistNotes.trim(),

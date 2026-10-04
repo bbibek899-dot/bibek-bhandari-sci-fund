@@ -3,6 +3,32 @@
  * to ensure high-definition clarity while keeping localStorage lightweight.
  */
 
+export const resolveImageUrl = (url?: string): string => {
+  if (!url) return '';
+  const trimmed = url.trim();
+  if (
+    trimmed.startsWith('data:') ||
+    trimmed.startsWith('http://') ||
+    trimmed.startsWith('https://') ||
+    trimmed.startsWith('blob:')
+  ) {
+    return trimmed;
+  }
+  let clean = trimmed;
+  if (clean.startsWith('/src/assets/')) {
+    clean = clean.replace('/src/assets/', '');
+  }
+  if (clean.startsWith('./')) {
+    clean = clean.slice(2);
+  }
+  if (clean.startsWith('/')) {
+    clean = clean.slice(1);
+  }
+  const base = import.meta.env.BASE_URL || './';
+  const prefix = base.endsWith('/') ? base : `${base}/`;
+  return `${prefix}${clean}`;
+};
+
 export const processImageFile = (
   file: File,
   maxWidth = 1200,

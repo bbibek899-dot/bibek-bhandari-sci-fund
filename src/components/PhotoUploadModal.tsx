@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { useCampaign } from '../context/CampaignContext';
-import { processImageFile } from '../utils/imageUtils';
+import { processImageFile, resolveImageUrl } from '../utils/imageUtils';
 import {
   Upload,
   Camera,
@@ -229,7 +229,7 @@ export const PhotoUploadModal: React.FC<PhotoUploadModalProps> = ({
               <div className="text-center">
                 <div className="relative inline-block">
                   <img
-                    src={campaign.creatorAvatar}
+                    src={resolveImageUrl(campaign.creatorAvatar)}
                     alt="Bibek Bhandari Profile"
                     className="w-32 h-32 rounded-full object-cover border-4 border-emerald-500/20 shadow-md mx-auto"
                   />
@@ -275,7 +275,7 @@ export const PhotoUploadModal: React.FC<PhotoUploadModalProps> = ({
               <div className="text-center">
                 <div className="relative rounded-2xl overflow-hidden border border-slate-200 aspect-[16/9] bg-slate-900 shadow-md">
                   <img
-                    src={campaign.heroBanner}
+                    src={resolveImageUrl(campaign.heroBanner)}
                     alt="Cover Banner"
                     className="w-full h-full object-cover"
                   />
@@ -328,7 +328,7 @@ export const PhotoUploadModal: React.FC<PhotoUploadModalProps> = ({
                   <div className="text-xs font-bold text-emerald-900">Official eSewa QR</div>
                   <div className="w-24 h-24 mx-auto rounded-lg overflow-hidden bg-white border border-emerald-300 p-1 flex items-center justify-center">
                     {campaign.payments.esewaQrImage ? (
-                      <img src={campaign.payments.esewaQrImage} alt="eSewa QR" className="w-full h-full object-contain" />
+                      <img src={resolveImageUrl(campaign.payments.esewaQrImage)} alt="eSewa QR" className="w-full h-full object-contain" />
                     ) : (
                       <span className="text-[10px] text-slate-400">No screenshot</span>
                     )}
@@ -355,7 +355,7 @@ export const PhotoUploadModal: React.FC<PhotoUploadModalProps> = ({
                   <div className="text-xs font-bold text-blue-900">SBI Bank QR</div>
                   <div className="w-24 h-24 mx-auto rounded-lg overflow-hidden bg-white border border-blue-300 p-1 flex items-center justify-center">
                     {campaign.payments.bankQrImage ? (
-                      <img src={campaign.payments.bankQrImage} alt="SBI Bank QR" className="w-full h-full object-contain" />
+                      <img src={resolveImageUrl(campaign.payments.bankQrImage)} alt="SBI Bank QR" className="w-full h-full object-contain" />
                     ) : (
                       <span className="text-[10px] text-slate-400">No screenshot</span>
                     )}
@@ -401,10 +401,10 @@ export const PhotoUploadModal: React.FC<PhotoUploadModalProps> = ({
               className="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-md flex items-center justify-center gap-2 transition-all active:scale-95 disabled:opacity-50"
             >
               <Sparkles className="w-4 h-4 text-emerald-200" />
-              <span>{publishing ? 'Publishing Live...' : '🚀 Publish Photos & QR Live to ais-pre-...'}</span>
+              <span>{publishing ? 'Saving...' : '💾 Save Photos & Verified QR Codes'}</span>
             </button>
             <p className="text-[10px] text-center text-slate-500">
-              This pushes your real photos, cover, and QR codes to the public server so all friends on Messenger &amp; WhatsApp see your exact photos!
+              Your real profile photo, cover banner, and official eSewa &amp; SBI Bank QR screenshots are active on your campaign portal!
             </p>
           </div>
 

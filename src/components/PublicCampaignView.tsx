@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useCampaign } from '../context/CampaignContext';
 import { PaymentMethodType } from '../types/fundraising';
+import { resolveImageUrl } from '../utils/imageUtils';
 import { PhotoUploadModal } from './PhotoUploadModal';
 import { FacebookTransparencyHub } from './FacebookTransparencyHub';
 import { MedicalPortfolioView } from './MedicalPortfolioView';
@@ -121,14 +122,15 @@ export const PublicCampaignView: React.FC = () => {
       {/* Hero Visual Banner */}
       <div className="relative w-full aspect-[16/9] sm:aspect-[21/9] rounded-2xl overflow-hidden bg-slate-900 shadow-sm group">
         <img
-          src={campaign.heroBanner}
+          src={resolveImageUrl(campaign.heroBanner)}
           alt={campaign.title}
           referrerPolicy="no-referrer"
           className="w-full h-full object-cover"
           onError={(e) => {
             const target = e.currentTarget;
-            if (!target.src.endsWith('/og_cover.jpg')) {
-              target.src = '/og_cover.jpg';
+            const fallback = resolveImageUrl('og_cover.jpg');
+            if (target.src !== fallback) {
+              target.src = fallback;
             }
           }}
         />
@@ -171,14 +173,15 @@ export const PublicCampaignView: React.FC = () => {
             title="Tap to upload real profile photo"
           >
             <img
-              src={campaign.creatorAvatar}
+              src={resolveImageUrl(campaign.creatorAvatar)}
               alt={campaign.creatorName}
               referrerPolicy="no-referrer"
               className="w-14 h-14 rounded-full object-cover border-2 border-white shadow-sm transition-transform group-hover:scale-105"
               onError={(e) => {
                 const target = e.currentTarget;
-                if (!target.src.endsWith('/og_photo.jpg')) {
-                  target.src = '/og_photo.jpg';
+                const fallback = resolveImageUrl('og_photo.jpg');
+                if (target.src !== fallback) {
+                  target.src = fallback;
                 }
               }}
             />
@@ -455,7 +458,7 @@ export const PublicCampaignView: React.FC = () => {
             <div className="flex items-start gap-3.5">
               <div className="w-12 h-12 rounded-xl overflow-hidden shrink-0 border border-emerald-600/60 bg-emerald-900">
                 <img
-                  src={campaign.medicalInfo.physiotherapistAvatar || campaign.creatorAvatar}
+                  src={resolveImageUrl(campaign.medicalInfo.physiotherapistAvatar || campaign.creatorAvatar)}
                   alt={campaign.medicalInfo.physiotherapistName}
                   referrerPolicy="no-referrer"
                   className="w-full h-full object-cover"
@@ -640,7 +643,7 @@ export const PublicCampaignView: React.FC = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="rounded-xl overflow-hidden border border-slate-200 aspect-[4/3] bg-slate-100 relative group">
                 <img
-                  src="/src/assets/images/exercise_scapular_wall_slide_1790313398123.jpg"
+                  src={resolveImageUrl('images/exercise_scapular_wall_slide_1790313398123.jpg')}
                   alt="Trunk & Scapular Balance Training"
                   referrerPolicy="no-referrer"
                   className="w-full h-full object-cover"
@@ -652,7 +655,7 @@ export const PublicCampaignView: React.FC = () => {
               </div>
               <div className="rounded-xl overflow-hidden border border-slate-200 aspect-[4/3] bg-slate-100 relative group">
                 <img
-                  src="/src/assets/images/exercise_isometric_knee_quad_1790313410854.jpg"
+                  src={resolveImageUrl('images/exercise_isometric_knee_quad_1790313410854.jpg')}
                   alt="Quadriceps Isometric Activation"
                   referrerPolicy="no-referrer"
                   className="w-full h-full object-cover"
@@ -708,7 +711,7 @@ export const PublicCampaignView: React.FC = () => {
                   {/* Photo / Video Banner */}
                   <div className="relative aspect-[16/10] bg-slate-900 overflow-hidden">
                     <img
-                      src={exercise.imageUrl}
+                      src={resolveImageUrl(exercise.imageUrl)}
                       alt={exercise.title}
                       referrerPolicy="no-referrer"
                       className="w-full h-full object-cover"
@@ -797,7 +800,7 @@ export const PublicCampaignView: React.FC = () => {
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
               <div className="flex items-center gap-3">
                 <img
-                  src={campaign.medicalInfo?.physiotherapistAvatar || campaign.creatorAvatar}
+                  src={resolveImageUrl(campaign.medicalInfo?.physiotherapistAvatar || campaign.creatorAvatar)}
                   alt={campaign.medicalInfo?.physiotherapistName}
                   referrerPolicy="no-referrer"
                   className="w-14 h-14 rounded-full object-cover border-2 border-emerald-600 shadow-sm"
@@ -899,7 +902,7 @@ export const PublicCampaignView: React.FC = () => {
               {upd.imageUrl && (
                 <div className="w-full h-64 rounded-xl overflow-hidden border border-slate-200">
                   <img
-                    src={upd.imageUrl}
+                    src={resolveImageUrl(upd.imageUrl)}
                     alt={upd.title}
                     referrerPolicy="no-referrer"
                     className="w-full h-full object-cover"

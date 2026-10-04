@@ -81,7 +81,7 @@ export const CreatorDashboard: React.FC = () => {
   const [exerciseDescription, setExerciseDescription] = useState('');
   const [exerciseFrequency, setExerciseFrequency] = useState('3 sets of 10 reps daily');
   const [exerciseTherapistNotes, setExerciseTherapistNotes] = useState('');
-  const [exerciseImageUrl, setExerciseImageUrl] = useState('/src/assets/images/exercise_isometric_knee_quad_1790313410854.jpg');
+  const [exerciseImageUrl, setExerciseImageUrl] = useState('./images/exercise_isometric_knee_quad_1790313410854.jpg');
   const [exerciseVideoUrl, setExerciseVideoUrl] = useState('');
 
   // Add Manual Donation Modal
@@ -110,8 +110,8 @@ export const CreatorDashboard: React.FC = () => {
   const [settingsTarget, setSettingsTarget] = useState(campaign.targetAmount.toString());
   const [settingsAvatar, setSettingsAvatar] = useState(campaign.creatorAvatar);
   const [settingsHero, setSettingsHero] = useState(campaign.heroBanner);
-  const [settingsEsewaQr, setSettingsEsewaQr] = useState(campaign.payments.esewaQrImage || '/src/assets/images/esewa_official_qr_1790321524240.jpg');
-  const [settingsBankQr, setSettingsBankQr] = useState(campaign.payments.bankQrImage || '/src/assets/images/sbi_bank_nepal_qr_1790321539674.jpg');
+  const [settingsEsewaQr, setSettingsEsewaQr] = useState(campaign.payments.esewaQrImage || './images/esewa_official_qr_1790321524240.jpg');
+  const [settingsBankQr, setSettingsBankQr] = useState(campaign.payments.bankQrImage || './images/sbi_bank_nepal_qr_1790321539674.jpg');
 
   const pendingCount = donations.filter(d => d.status === 'pending').length;
 
@@ -210,7 +210,7 @@ Thank you so much to each and every person walking this recovery journey with me
         injuryDate: campaign.medicalInfo?.injuryDate || 'November 2025',
         rehabCenter,
         physiotherapistName,
-        physiotherapistAvatar: campaign.medicalInfo?.physiotherapistAvatar || '/src/assets/images/avatar_physiotherapist_dr_1790313433006.jpg',
+        physiotherapistAvatar: campaign.medicalInfo?.physiotherapistAvatar || './images/avatar_physiotherapist_dr_1790313433006.jpg',
         therapistConcern,
         clinicalGoal,
         medicalDisclaimer: campaign.medicalInfo?.medicalDisclaimer || '',
@@ -1338,13 +1338,13 @@ Thank you so much to each and every person walking this recovery journey with me
                   onChange={e => setExerciseImageUrl(e.target.value)}
                   className="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs text-slate-800"
                 >
-                  <option value="/src/assets/images/exercise_isometric_knee_quad_1790313410854.jpg">
+                  <option value="./images/exercise_isometric_knee_quad_1790313410854.jpg">
                     Quadriceps Isometric Knee Lift
                   </option>
-                  <option value="/src/assets/images/exercise_scapular_wall_slide_1790313398123.jpg">
+                  <option value="./images/exercise_scapular_wall_slide_1790313398123.jpg">
                     Scapular Wall Slides &amp; Trunk Posture
                   </option>
-                  <option value="/src/assets/images/exercise_rotator_cuff_band_1790313421523.jpg">
+                  <option value="./images/exercise_rotator_cuff_band_1790321421523.jpg">
                     Resistance Band Shoulder &amp; Lat Pull
                   </option>
                 </select>
